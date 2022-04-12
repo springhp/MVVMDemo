@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.MainFragment"
+        android:label="Main"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/to_register_fragment"
+            app:destination="@id/register_fragment" />
+        <action
+            android:id="@+id/to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.RegisterFragment"
+        android:label="Login" />
+
+    <action
+        android:id="@+id/action_to_webFragment"
+        app:destination="@id/webFragment" />
+
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.WebFragment"
+        android:label="WebFragment" />
+
+    <action
+        android:id="@+id/action_to_loginFragment"
+        app:destination="@id/login_fragment" />
+
+</navigation>
