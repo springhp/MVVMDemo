@@ -17,32 +17,23 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
 
         mainViewpager.apply {
             isUserInputEnabled = false
-            offscreenPageLimit = 5
+            offscreenPageLimit = 3
             adapter = object : FragmentStateAdapter(this@MainFragment) {
                 override fun createFragment(position: Int): Fragment {
-                    when (position) {
+                    return when (position) {
                         0 -> {
-                            return HomeFragment()
+                            DataFragment()
                         }
                         1 -> {
-                            return ProjectFragment()
-                        }
-                        2 -> {
-                            return RegisterFragment()
-                        }
-                        3 -> {
-                            return HomeFragment()
-                        }
-                        4 -> {
-                            return MeFragment()
+                            VisitorFragment()
                         }
                         else -> {
-                            return MeFragment()
+                            SettingFragment()
                         }
                     }
                 }
 
-                override fun getItemCount() = 5
+                override fun getItemCount() = 3
             }
         }
 
@@ -54,14 +45,8 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                 R.id.menu_project -> {
                     mainViewpager.setCurrentItem(1, false)
                 }
-                R.id.menu_system -> {
-                    mainViewpager.setCurrentItem(2, false)
-                }
-                R.id.menu_public -> {
-                    mainViewpager.setCurrentItem(3, false)
-                }
                 else -> {
-                    mainViewpager.setCurrentItem(4, false)
+                    mainViewpager.setCurrentItem(2, false)
                 }
             }
             return@setOnItemSelectedListener true

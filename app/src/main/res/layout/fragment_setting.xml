@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/purple_700"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="设置"
+            app:titleTextColor="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/llEnterprise"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="企业"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvEnterprise"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="企业"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/ic_right" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_marginLeft="12dp" />
+
+        <LinearLayout
+            android:id="@+id/llVersion"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="版本号"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="1.0.0"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/ic_right" />
+
+        </LinearLayout>
+
+        <View style="@style/LineHorizontal" />
+    </LinearLayout>
+</layout>

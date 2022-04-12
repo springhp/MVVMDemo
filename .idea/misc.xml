@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/drawable/bg_btn.xml" value="0.1945" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_visitor.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/fragment_data.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/fragment_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/fragment_setting.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/item_enterprise.xml" value="0.18645833333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/layout_collect_view_unchecked.xml" value="0.18489583333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/layout_custom_progress_dialog_view.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/menu/home_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/menu/home_menu2.xml" value="0.18645833333333334" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/menu/menu_navigation.xml" value="0.18645833333333334" />
         <entry key="app/src/main/res/drawable/item_imgselector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/title_lable_shap.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/title_lable_shap1.xml" value="0.1" />

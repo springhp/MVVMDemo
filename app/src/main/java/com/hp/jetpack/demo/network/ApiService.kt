@@ -4,12 +4,14 @@ import com.hp.jetpack.demo.data.bean.ApiPagerResponse
 import com.hp.jetpack.demo.data.bean.AriticleResponse
 import com.hp.jetpack.demo.data.bean.BannerResponse
 import com.hp.jetpack.demo.data.bean.UserInfo
+import com.hp.jetpack.demo.data.bean.result.BaseResult
+import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
 import retrofit2.http.*
 
 interface ApiService {
 
     companion object {
-        const val SERVER_URL = "https://wanandroid.com/"
+        const val SERVER_URL = "http://lyapi.zongheng-link.com/"
         const val SERVER_URL1 = "https://wanandroid.com/"
     }
 
@@ -22,6 +24,12 @@ interface ApiService {
         @Field("username") username: String,
         @Field("password") pwd: String
     ): ApiResponse<UserInfo>
+
+    /**
+     * 登录
+     */
+    @POST("learun/adms/vm/vor/bevisitedenterprisedateitem")
+    suspend fun getEnterprise(): BaseResult<List<EnterpriseBean>>
 
 //    /**
 //     * 注册

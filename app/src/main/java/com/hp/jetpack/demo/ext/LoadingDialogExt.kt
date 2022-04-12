@@ -25,11 +25,11 @@ fun AppCompatActivity.showLoadingExt(message: String = "请求网络中") {
     if (!this.isFinishing) {
         if (loadingDialog == null) {
             loadingDialog = MaterialDialog(this)
-                    .cancelable(true)
-                    .cancelOnTouchOutside(false)
-                    .cornerRadius(12f)
-                    .customView(R.layout.layout_custom_progress_dialog_view)
-                    .lifecycleOwner(this)
+                .cancelable(true)
+                .cancelOnTouchOutside(false)
+                .cornerRadius(12f)
+                .customView(R.layout.layout_custom_progress_dialog_view)
+                .lifecycleOwner(this)
             loadingDialog?.getCustomView()?.run {
                 this.findViewById<TextView>(R.id.loading_tips).text = message
 //                this.findViewById<ProgressBar>(R.id.progressBar).indeterminateTintList = SettingUtil.getOneColorStateList(this@showLoadingExt)
@@ -50,7 +50,12 @@ fun Fragment.showLoadingExt(message: String = "请求网络中") {
                     .cancelable(true)
                     .cancelOnTouchOutside(false)
                     .cornerRadius(12f)
-                    .customView(R.layout.layout_custom_progress_dialog_view)
+                    .customView(
+                        viewRes = R.layout.layout_custom_progress_dialog_view,
+                        dialogWrapContent = true,
+                        scrollable = true,
+                        noVerticalPadding = true
+                    )
                     .lifecycleOwner(this)
                 loadingDialog?.getCustomView()?.run {
                     this.findViewById<TextView>(R.id.loading_tips).text = message

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.hp.jetpack.demo.model.VisitorViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/purple_700"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="现场预约"
+            app:titleTextColor="@color/white" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="4dp">
+
+            <LinearLayout
+                android:id="@+id/llMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="照片"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv"
+                        android:layout_width="78dp"
+                        android:layout_height="78dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_photo" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="姓名"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etName"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入姓名"
+                        android:text="@{model.name}"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="电话"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入电话"
+                        android:inputType="number"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="身份证"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etId"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入身份证"
+                        android:inputType="number"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="拜访人"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvBfr"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择拜访人"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="预约时间"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etStartTime"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="请选择时间"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="-"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/etEndTime"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="请选择结束时间"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <Button
+                    android:id="@+id/btnOk"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="200dp"
+                    android:text="保存"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>
