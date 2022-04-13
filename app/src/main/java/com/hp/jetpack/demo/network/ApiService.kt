@@ -4,8 +4,11 @@ import com.hp.jetpack.demo.data.bean.ApiPagerResponse
 import com.hp.jetpack.demo.data.bean.AriticleResponse
 import com.hp.jetpack.demo.data.bean.BannerResponse
 import com.hp.jetpack.demo.data.bean.UserInfo
+import com.hp.jetpack.demo.data.bean.result.AddDeviceWhiteResult
 import com.hp.jetpack.demo.data.bean.result.BaseResult
+import com.hp.jetpack.demo.data.bean.result.DistributeDataResult
 import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -25,23 +28,37 @@ interface ApiService {
         @Field("password") pwd: String
     ): ApiResponse<UserInfo>
 
-    /**
-     * 登录
-     */
     @POST("learun/adms/vm/vor/bevisitedenterprisedateitem")
     suspend fun getEnterprise(): BaseResult<List<EnterpriseBean>>
 
-//    /**
-//     * 注册
-//     */
-//    @FormUrlEncoded
-//    @POST("user/register")
-//    suspend fun register(
-//        @Field("username") username: String, @Field("password") pwd: String, @Field(
-//            "repassword"
-//        ) rpwd: String
-//    ): ApiResponse<Any>
-//
+    /**
+     * 获取待下发的数据
+     */
+    @FormUrlEncoded
+    @POST("afm/afrw/getdistributedata")
+    suspend fun getData(
+        @Field("data") data: String,
+    ): BaseResult<List<DistributeDataResult>>
+
+    @FormUrlEncoded
+    @POST("afm/afrw/getbase64")
+    suspend fun getBase64Image(
+        @Field("data") data: String,
+    ): BaseResult<Any>
+
+    @Headers("Domain-Name: DeviceWhiteUrl")
+    @POST("addDeviceWhiteList")
+    suspend fun addDeviceWhite(
+        @Body body: RequestBody
+    ): AddDeviceWhiteResult
+
+    @FormUrlEncoded
+    @POST("afm/afrw/updateacfdata")
+    suspend fun updateData(
+        @Field("data") data: String,
+    ): BaseResult<Any>
+
+
     /**
      * 获取banner数据
      */

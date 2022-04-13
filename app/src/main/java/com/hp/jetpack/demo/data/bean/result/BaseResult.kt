@@ -4,7 +4,7 @@ import com.hp.jetpack.demo.network.BaseResponse
 
 data class BaseResult<T>(val code: Int, val info: String, val data: T) :
     BaseResponse<T>() {
-    override fun isSuccess() = code == 0
+    override fun isSuccess() = code == 200
 
     override fun getResponseData() = data
 
