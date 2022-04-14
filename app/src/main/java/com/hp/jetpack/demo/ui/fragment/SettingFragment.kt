@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
@@ -14,6 +15,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.CacheDiskUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ktx.immersionBar
@@ -108,7 +110,6 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         }
 
         fun share() {
-
             startActivity(Intent().apply {
                 action = Intent.ACTION_SEND
                 type = "text/plain"
@@ -121,6 +122,18 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             // 正式环境，测试环境切换
             ToastUtils.showShort("环境切换成功")
             //RetrofitUrlManager.getInstance().setGlobalDomain("")
+        }
+
+        fun clearCache() {
+            // TODO: 目前没有缓存，没法清理，没有测试过
+            var size = CacheDiskUtils.getInstance().cacheSize
+            AlertDialog.Builder(mActivity).apply {
+                setTitle("清除缓存")
+                setCancelable(true)
+                setMessage("缓存大小:${size}M")
+                setNegativeButton("确定") { _, _ -> CacheDiskUtils.getInstance().clear() }
+                setPositiveButton("取消", null)
+            }.show()
         }
     }
 
