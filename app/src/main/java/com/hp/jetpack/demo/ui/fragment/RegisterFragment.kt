@@ -17,6 +17,7 @@ class RegisterFragment : BaseFragment<BaseViewModel, FragmentRegisterBinding>() 
             setNavigationIcon(R.drawable.ic_back)
             setNavigationOnClickListener {
                 nav().navigateUp()
+                throw NullPointerException()
             }
             title = "注册"
         }

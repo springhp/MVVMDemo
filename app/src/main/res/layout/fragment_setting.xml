@@ -108,6 +108,18 @@
 
         <View style="@style/LineHorizontal" />
 
+        <TextView
+            android:id="@+id/tvLineChange"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->click.lineChange()}"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:text="环境切换"></TextView>
+
+        <View style="@style/LineHorizontal" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"

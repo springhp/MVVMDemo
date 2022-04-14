@@ -102,6 +102,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
         }
+
         fun logout() {
             nav().navigate(R.id.login_fragment)
         }
@@ -114,6 +115,12 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                 putExtra(Intent.EXTRA_SUBJECT, "分享")
                 putExtra(Intent.EXTRA_TEXT, "推荐您使用一款软件")
             })
+        }
+
+        fun lineChange() {
+            // 正式环境，测试环境切换
+            ToastUtils.showShort("环境切换成功")
+            //RetrofitUrlManager.getInstance().setGlobalDomain("")
         }
     }
 
