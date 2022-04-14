@@ -4,11 +4,15 @@
 
     <data>
 
+        <variable
+            name="click"
+            type="com.hp.jetpack.demo.ui.fragment.SettingFragment.ProxyClick" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -16,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/purple_700"
+            android:fitsSystemWindows="true"
             app:layout_constraintTop_toTopOf="parent"
             app:title="设置"
             app:titleTextColor="@color/white" />
@@ -61,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->click.downloadApp()}"
             android:orientation="horizontal"
             android:paddingLeft="16dp">
 
@@ -89,5 +95,28 @@
         </LinearLayout>
 
         <View style="@style/LineHorizontal" />
+
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->click.share()}"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:text="分享"></TextView>
+
+        <View style="@style/LineHorizontal" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_margin="24dp"
+            android:background="@color/purple_500"
+            android:onClick="@{()->click.logout()}"
+            android:text="退出登录"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 </layout>

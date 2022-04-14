@@ -17,15 +17,24 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
 
         mainViewpager.apply {
             isUserInputEnabled = false
-            offscreenPageLimit = 3
+            offscreenPageLimit = 5
             adapter = object : FragmentStateAdapter(this@MainFragment) {
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
                         0 -> {
-                            DataFragment()
+                            HomeFragment()
                         }
                         1 -> {
+                            LoginFragment()
+                        }
+                        2 -> {
+                            DataFragment()
+                        }
+                        3 -> {
                             VisitorFragment()
+                        }
+                        4 -> {
+                            SettingFragment()
                         }
                         else -> {
                             SettingFragment()
@@ -33,7 +42,7 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                     }
                 }
 
-                override fun getItemCount() = 3
+                override fun getItemCount() = 5
             }
         }
 
@@ -45,12 +54,20 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                 R.id.menu_project -> {
                     mainViewpager.setCurrentItem(1, false)
                 }
+                R.id.menu_system -> {
+                    mainViewpager.setCurrentItem(3, false)
+                }
+                R.id.menu_public -> {
+                    mainViewpager.setCurrentItem(4, false)
+                }
                 else -> {
-                    mainViewpager.setCurrentItem(2, false)
+                    mainViewpager.setCurrentItem(5, false)
                 }
             }
             return@setOnItemSelectedListener true
         }
+
+//        mainBottom.selectedItemId = R.id.menu_public //会导致状态栏变白色
 
     }
 }

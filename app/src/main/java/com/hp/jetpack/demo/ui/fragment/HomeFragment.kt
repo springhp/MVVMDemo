@@ -2,15 +2,14 @@ package com.hp.jetpack.demo.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ConvertUtils
+import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.data.bean.BannerResponse
 import com.hp.jetpack.demo.databinding.FragmentHomeBinding
 import com.hp.jetpack.demo.ext.*
-import com.hp.jetpack.demo.lifecycle.MyLifecycleListener
 import com.hp.jetpack.demo.model.HomeViewModel
 import com.hp.jetpack.demo.ui.adapter.AriticleAdapter
 import com.hp.jetpack.demo.weight.banner.HomeBannerAdapter
@@ -24,11 +23,11 @@ import kotlinx.android.synthetic.main.include_list.*
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
+
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     //适配器
     private val articleAdapter: AriticleAdapter by lazy { AriticleAdapter(arrayListOf(), true) }
-
 
     //界面状态管理者
     private lateinit var loadSir: LoadService<Any>
@@ -39,10 +38,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private lateinit var footView: DefineLoadMoreView
 
     override fun initView(savedInstanceState: Bundle?) {
+        immersionBar {
+        }
 
         toolbar.run {
             title = "首页"
             inflateMenu(R.menu.home_menu)
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.home_search -> {
+                        nav().navigate(R.id.qr_code_Fragment, Bundle().apply {
+                            putString("test", "test2")
+                        })
+                    }
+                }
+                true
+            }
+//            mActivity.setSupportActionBar(this)
         }
         loadSir = loadServiceInit(swipeRefresh) {
             loadSir.showLoading()
@@ -60,7 +73,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             it.initFloatBtn(floatBtn)
         }
 
-        lifecycle.addObserver(MyLifecycleListener("HOME"))
     }
 
     override fun lazyLoadData() {
@@ -109,4 +121,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             })
         }
     }
+
+
 }

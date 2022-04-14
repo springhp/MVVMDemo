@@ -14,8 +14,8 @@ import retrofit2.http.*
 interface ApiService {
 
     companion object {
-        const val SERVER_URL = "http://lyapi.zongheng-link.com/"
-        const val SERVER_URL1 = "https://wanandroid.com/"
+        const val SERVER_URL = "https://wanandroid.com/"
+        const val ZONG_HENG = "http://lyapi.zongheng-link.com/"
     }
 
     /**
@@ -28,18 +28,21 @@ interface ApiService {
         @Field("password") pwd: String
     ): ApiResponse<UserInfo>
 
+    @Headers("Domain-Name: zongheng")
     @POST("learun/adms/vm/vor/bevisitedenterprisedateitem")
     suspend fun getEnterprise(): BaseResult<List<EnterpriseBean>>
 
     /**
      * 获取待下发的数据
      */
+    @Headers("Domain-Name: zongheng")
     @FormUrlEncoded
     @POST("afm/afrw/getdistributedata")
     suspend fun getData(
         @Field("data") data: String,
     ): BaseResult<List<DistributeDataResult>>
 
+    @Headers("Domain-Name: zongheng")
     @FormUrlEncoded
     @POST("afm/afrw/getbase64")
     suspend fun getBase64Image(
@@ -52,6 +55,7 @@ interface ApiService {
         @Body body: RequestBody
     ): AddDeviceWhiteResult
 
+    @Headers("Domain-Name: zongheng")
     @FormUrlEncoded
     @POST("afm/afrw/updateacfdata")
     suspend fun updateData(

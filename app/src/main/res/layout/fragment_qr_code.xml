@@ -3,9 +3,6 @@
 
     <data>
 
-        <variable
-            name="click"
-            type="com.hp.jetpack.demo.ui.fragment.HomeFragment" />
     </data>
 
     <LinearLayout
@@ -16,6 +13,6 @@
 
         <include layout="@layout/include_toolbar" />
 
-        <include layout="@layout/include_list" />
+
     </LinearLayout>
 </layout>

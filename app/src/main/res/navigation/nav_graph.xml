@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.hp.jetpack.demo.ui.fragment.LoginFragment"
-        android:label="Login">
+        android:label="LoginFragment">
         <action
             android:id="@+id/to_register_fragment"
             app:destination="@id/register_fragment" />
@@ -45,5 +45,16 @@
     <action
         android:id="@+id/action_to_loginFragment"
         app:destination="@id/login_fragment" />
+
+    <fragment
+        android:id="@+id/qr_code_Fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.tools.QRCodeFragment"
+        android:label="QRCodeFragment" />
+
+    <fragment
+        android:id="@+id/setting_Fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.tools.QRCodeFragment"
+        tools:layout="@layout/fragment_setting"
+        android:label="QRCodeFragment" />
 
 </navigation>

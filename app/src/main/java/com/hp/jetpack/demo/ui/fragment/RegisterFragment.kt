@@ -6,17 +6,19 @@ import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.FragmentRegisterBinding
 import com.hp.jetpack.demo.ext.nav
-import com.hp.jetpack.demo.lifecycle.MyLifecycleListener
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_data.*
 
 class RegisterFragment : BaseFragment<BaseViewModel, FragmentRegisterBinding>() {
     override fun layoutId(): Int = R.layout.fragment_register
 
 
     override fun initView(savedInstanceState: Bundle?) {
-        lifecycle.addObserver(MyLifecycleListener("Register"))
-        mDataBinding.btnBack.setOnClickListener {
-            nav().navigateUp()
+        toolbar.apply {
+            setNavigationIcon(R.drawable.ic_back)
+            setNavigationOnClickListener {
+                nav().navigateUp()
+            }
+            title = "注册"
         }
     }
 
