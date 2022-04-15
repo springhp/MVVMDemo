@@ -1,10 +1,8 @@
 package com.hp.jetpack.demo.data.bean
 
-import android.annotation.SuppressLint
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
-@SuppressLint("ParcelCreator")
 @Parcelize
 data class CollectResponse(
     var chapterId: Int,

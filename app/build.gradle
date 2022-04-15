@@ -52,9 +52,9 @@ dependencies {
     implementation 'com.google.zxing:zxing-parent:3.4.1'
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'androidx.navigation:navigation-runtime:2.3.5'
@@ -79,9 +79,9 @@ dependencies {
     implementation 'com.blankj:utilcodex:1.31.0'
 
     //BaseAdapter **
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
 
-    //加载webview **
+    //加载web view **
     implementation 'com.just.agentweb:agentweb:4.1.3'
     implementation 'com.just.agentweb:filechooser:4.1.3'
     implementation 'com.download.library:Downloader:4.1.3'
@@ -118,6 +118,7 @@ dependencies {
     implementation 'com.kingja.loadsir:loadsir:1.3.8'
 
     implementation 'androidx.startup:startup-runtime:1.1.1'
+    implementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -135,4 +136,8 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+
+    implementation 'cn.bertsir.zbarLibary:zbarlibary:1.4.2'
+
+    implementation 'com.guolindev.permissionx:permissionx:1.6.1'
 }

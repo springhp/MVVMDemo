@@ -1,8 +1,9 @@
 package com.hp.jetpack.demo.data.bean
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-//TODO 还没找到替代方法，插件过期了
+@Parcelize
 data class UserInfo(
     var admin: Boolean = false,
     var chapterTops: List<String> = listOf(),
@@ -15,4 +16,4 @@ data class UserInfo(
     var token: String = "",
     var type: Int = 0,
     var username: String = ""
-) : Serializable
+) : Parcelable

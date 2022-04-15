@@ -1,5 +1,6 @@
 package com.hp.jetpack.demo
 
+import android.Manifest
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
@@ -8,6 +9,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.base.activity.BaseVmActivity
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
+import com.permissionx.guolindev.PermissionX
 
 class MainActivity : BaseVmActivity<BaseViewModel>() {
     override fun layoutId() = R.layout.activity_main
@@ -63,5 +65,18 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
     }
 
     override fun dismissLoading() {
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        PermissionX.init(this).permissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        ).request { _, _, _ ->
+
+        }
+
     }
 }

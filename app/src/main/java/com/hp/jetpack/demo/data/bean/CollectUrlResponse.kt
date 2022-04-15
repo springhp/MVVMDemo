@@ -1,15 +1,13 @@
 package com.hp.jetpack.demo.data.bean
 
-import android.annotation.SuppressLint
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * 收藏的网址类
  * @Author:         hegaojian
  * @CreateDate:     2019/8/31 10:36
  */
-@SuppressLint("ParcelCreator")
 @Parcelize
 data class CollectUrlResponse(
     var icon: String,

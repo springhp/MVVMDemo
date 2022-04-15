@@ -45,7 +45,7 @@ object LogUtils {
      * @param tag 标签
      * @param msg 日志内容
      */
-    fun debugLongInfo(tag: String?, msg: String) {
+    private fun debugLongInfo(tag: String?, msg: String) {
         var msg = msg
         if (!jetpackMvvmLog || TextUtils.isEmpty(msg)) {
             return

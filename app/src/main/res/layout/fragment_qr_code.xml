@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="click"
+            type="com.hp.jetpack.demo.ui.fragment.tools.QRCodeFragment.ProxyClick" />
     </data>
 
     <LinearLayout
@@ -11,8 +15,7 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -21,6 +24,11 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_qr_code"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:onClick="@{()->click.openQrcode()}"
+            android:text="打开二维码扫描" />
     </LinearLayout>
 </layout>

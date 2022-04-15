@@ -1,13 +1,11 @@
 package com.hp.jetpack.demo.data.bean
 
-import android.annotation.SuppressLint
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * 轮播图
  */
-@SuppressLint("ParcelCreator")
 @Parcelize
 data class BannerResponse(
     var desc: String = "",
