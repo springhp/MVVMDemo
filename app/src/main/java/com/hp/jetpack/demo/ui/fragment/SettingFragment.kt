@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
@@ -33,7 +34,6 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 
     override fun initView(savedInstanceState: Bundle?) {
         immersionBar {
-            statusBarColor(R.color.purple_500)
         }
 
         mDataBinding.click = ProxyClick()
@@ -70,15 +70,15 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
     }
 
     private fun showAdapterMaterialDialog(data: MutableList<EnterpriseBean>) {
-        var adapter = EnterpriseAdapter(data)
+        val adapter = EnterpriseAdapter(data)
 
-        var dialog = MaterialDialog(mActivity, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        val dialog = MaterialDialog(mActivity, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             customListAdapter(adapter)
             lifecycleOwner(this@SettingFragment)
         }
 
-        adapter.setOnItemClickListener() { _, _, position ->
-            var bean = data[position]
+        adapter.setOnItemClickListener { _, _, position ->
+            val bean = data[position]
             MySpUtils.enterpriseID = bean.id
             MySpUtils.enterpriseName = bean.text
             mDataBinding.tvEnterprise.text = bean.text
@@ -89,15 +89,15 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 
     inner class ProxyClick {
         fun downloadApp() {
-            var request = DownloadManager.Request(Uri.parse("https://www.baidu.com")).apply {
+            val request = DownloadManager.Request(Uri.parse("https://www.baidu.com")).apply {
                 setAllowedOverRoaming(true)//移动网络情况下是否允许漫游
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
                 setTitle("新版本更新")
                 setDescription("正在下载更新文件")
             }
-            var downloadManager =
+            val downloadManager =
                 ContextCompat.getSystemService(mActivity, DownloadManager::class.java)
-            var dwnId = downloadManager?.enqueue(request)
+            val dwnId = downloadManager?.enqueue(request)
             LogUtils.e("==${dwnId}")
             mActivity.registerReceiver(
                 DownloadBroadcastReceiver(),
@@ -126,7 +126,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 
         fun clearCache() {
             // TODO: 目前没有缓存，没法清理，没有测试过
-            var size = CacheDiskUtils.getInstance().cacheSize
+            val size = CacheDiskUtils.getInstance().cacheSize
             AlertDialog.Builder(mActivity).apply {
                 setTitle("清除缓存")
                 setCancelable(true)
@@ -134,6 +134,13 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                 setNegativeButton("确定") { _, _ -> CacheDiskUtils.getInstance().clear() }
                 setPositiveButton("取消", null)
             }.show()
+        }
+
+        fun modeChange() {
+            //MODE_NIGHT_NO 亮色模式
+            //MODE_NIGHT_YES 暗色模式
+            //MODE_NIGHT_FOLLOW_SYSTEM 跟随系统
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 

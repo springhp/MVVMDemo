@@ -7,7 +7,6 @@ import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.FragmentMainBinding
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
 
@@ -15,7 +14,7 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
 
-        mainViewpager.apply {
+        mDataBinding.mainViewpager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 5
             adapter = object : FragmentStateAdapter(this@MainFragment) {
@@ -46,22 +45,22 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
             }
         }
 
-        mainBottom.setOnItemSelectedListener {
+        mDataBinding.mainBottom.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_main -> {
-                    mainViewpager.setCurrentItem(0, false)
+                    mDataBinding.mainViewpager.setCurrentItem(0, false)
                 }
                 R.id.menu_project -> {
-                    mainViewpager.setCurrentItem(1, false)
+                    mDataBinding.mainViewpager.setCurrentItem(1, false)
                 }
                 R.id.menu_system -> {
-                    mainViewpager.setCurrentItem(3, false)
+                    mDataBinding.mainViewpager.setCurrentItem(3, false)
                 }
                 R.id.menu_public -> {
-                    mainViewpager.setCurrentItem(4, false)
+                    mDataBinding.mainViewpager.setCurrentItem(4, false)
                 }
                 else -> {
-                    mainViewpager.setCurrentItem(5, false)
+                    mDataBinding.mainViewpager.setCurrentItem(5, false)
                 }
             }
             return@setOnItemSelectedListener true

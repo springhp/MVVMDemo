@@ -1,5 +1,6 @@
 package com.hp.jetpack.demo.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +18,7 @@ import com.hp.jetpack.demo.weight.banner.HomeBannerViewHolder
 import com.hp.jetpack.demo.weight.recyclerview.DefineLoadMoreView
 import com.hp.jetpack.demo.weight.recyclerview.SpaceItemDecoration
 import com.kingja.loadsir.core.LoadService
-import com.yanzhenjie.recyclerview.SwipeRecyclerView
 import com.zhpan.bannerview.BannerViewPager
-import kotlinx.android.synthetic.main.include_list.*
-import kotlinx.android.synthetic.main.include_recyclerview.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -40,8 +37,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         immersionBar {
         }
-
-        toolbar.run {
+        mDataBinding.toolbar.run {
             title = "首页"
             inflateMenu(R.menu.home_menu)
 
@@ -55,22 +51,22 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
                 true
             }
-//            mActivity.setSupportActionBar(this)
         }
-        loadSir = loadServiceInit(swipeRefresh) {
+
+        loadSir = loadServiceInit(mDataBinding.swipeRefresh) {
             loadSir.showLoading()
             mViewModel.getBannerData()
             mViewModel.getHomeData(true)
         }
 
-        recyclerView.init(LinearLayoutManager(context), articleAdapter).let {
+        mDataBinding.recyclerView.init(LinearLayoutManager(context), articleAdapter).let {
             //因为首页要添加轮播图，所以我设置了firstNeedTop字段为false,即第一条数据不需要设置间距
             it.addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
-            footView = it.initFooter(SwipeRecyclerView.LoadMoreListener {
+            footView = it.initFooter {
                 mViewModel.getHomeData(false)
-            })
+            }
             //初始化FloatingActionButton
-            it.initFloatBtn(floatBtn)
+            //it.initFloatBtn(floatBtn)
         }
 
     }
@@ -82,18 +78,25 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         mViewModel.getHomeData(true)
     }
 
+    @SuppressLint("InflateParams")
     override fun createObserver() {
         super.createObserver()
         mViewModel.run {
-            homeDataState.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            homeDataState.observe(viewLifecycleOwner) {
                 //设值 新写了个拓展函数，搞死了这个恶心的重复代码
-                loadListData(it, articleAdapter, loadSir, recyclerView, swipeRefresh)
-            })
+                loadListData(
+                    it,
+                    articleAdapter,
+                    loadSir,
+                    mDataBinding.recyclerView,
+                    mDataBinding.swipeRefresh
+                )
+            }
 
-            bannerData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { resultState ->
+            bannerData.observe(viewLifecycleOwner) { resultState ->
                 parseState(resultState, { data ->
-                    if (recyclerView.headerCount == 0) {
-                        var headView =
+                    if (mDataBinding.recyclerView.headerCount == 0) {
+                        val headView =
                             LayoutInflater.from(context).inflate(R.layout.include_banner, null)
                                 .apply {
                                     findViewById<BannerViewPager<BannerResponse, HomeBannerViewHolder>>(
@@ -106,7 +109,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                                                 R.id.action_to_webFragment,
                                                 Bundle().apply {
                                                     putParcelable(
-                                                        "bannerdata",
+                                                        "banner_data",
                                                         data[it]
                                                     )
                                                 })
@@ -114,11 +117,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                                         create(data)
                                     }
                                 }
-                        recyclerView.addHeaderView(headView)
-                        recyclerView.scrollToPosition(0)
+                        mDataBinding.recyclerView.addHeaderView(headView)
+                        mDataBinding.recyclerView.scrollToPosition(0)
                     }
                 })
-            })
+            }
         }
     }
 

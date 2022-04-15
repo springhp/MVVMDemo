@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -24,7 +24,8 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
+        dataBinding true
+        viewBinding true
     }
 
     //使用Kotlin实验特性
@@ -44,10 +45,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    dataBinding {
-        enabled = true
     }
 }
 

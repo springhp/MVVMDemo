@@ -2,7 +2,12 @@
 <resources>
     <style name="LineHorizontal" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">1px</item>
         <item name="android:background">#ededed</item>
     </style>
+
+    <style name="LineHorizontalML12" parent="LineHorizontal">
+        <item name="android:layout_marginLeft">12dp</item>
+    </style>
+
 </resources>

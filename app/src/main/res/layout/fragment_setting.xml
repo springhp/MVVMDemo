@@ -19,16 +19,18 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/purple_700"
+            android:background="?attr/colorPrimary"
             android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="设置"
-            app:titleTextColor="@color/white" />
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="设置" />
 
         <LinearLayout
             android:id="@+id/llEnterprise"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="16dp">
@@ -46,7 +48,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="企业"
-                android:textColor="#333"
+                android:textColor="@color/colorT1"
                 android:textSize="16sp" />
 
             <ImageView
@@ -57,14 +59,12 @@
 
         </LinearLayout>
 
-        <View
-            style="@style/LineHorizontal"
-            android:layout_marginLeft="12dp" />
+        <View style="@style/LineHorizontalML12" />
 
         <LinearLayout
             android:id="@+id/llVersion"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:onClick="@{()->click.downloadApp()}"
             android:orientation="horizontal"
@@ -83,7 +83,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="1.0.0"
-                android:textColor="#333"
+                android:textColor="@color/colorT1"
                 android:textSize="16sp" />
 
             <ImageView
@@ -94,48 +94,64 @@
 
         </LinearLayout>
 
-        <View style="@style/LineHorizontal" />
+        <View style="@style/LineHorizontalML12" />
 
         <TextView
             android:id="@+id/tvShare"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:onClick="@{()->click.share()}"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:text="分享"></TextView>
+            android:text="分享"
+            android:textSize="16sp"></TextView>
 
-        <View style="@style/LineHorizontal" />
+        <View style="@style/LineHorizontalML12" />
 
         <TextView
             android:id="@+id/tvLineChange"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:onClick="@{()->click.lineChange()}"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:text="环境切换" />
+            android:text="环境切换"
+            android:textSize="16sp" />
 
-        <View style="@style/LineHorizontal" />
+        <View style="@style/LineHorizontalML12" />
 
         <TextView
             android:id="@+id/tv_clear_cache"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:onClick="@{()->click.clearCache()}"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:text="清理缓存" />
+            android:text="清理缓存"
+            android:textSize="16sp" />
 
-        <View style="@style/LineHorizontal" />
+        <View style="@style/LineHorizontalML12" />
+
+        <TextView
+            android:id="@+id/tv_dark"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->click.modeChange()}"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:text="深色模式"
+            android:textSize="16sp" />
+
+        <View style="@style/LineHorizontalML12" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="48dp"
             android:layout_margin="24dp"
             android:background="@color/purple_500"
             android:onClick="@{()->click.logout()}"

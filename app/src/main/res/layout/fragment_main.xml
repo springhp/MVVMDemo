@@ -19,7 +19,6 @@
             android:id="@+id/mainBottom"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/white"
             app:itemIconSize="24dp"
             app:itemIconTint="@color/bottom_selector"
             app:itemTextColor="@color/bottom_selector"

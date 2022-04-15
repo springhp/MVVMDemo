@@ -16,7 +16,6 @@ class VisitorFragment : BaseFragment<VisitorViewModel, FragmentVisitorBinding>()
     override fun initView(savedInstanceState: Bundle?) {
         mDataBinding.model = mViewModel
 
-        mViewModel.name.set("bbbbb")
         mDataBinding.iv.setOnClickListener {
 
             EasyPhotos.createCamera(this@VisitorFragment, true)//参数说明：上下文

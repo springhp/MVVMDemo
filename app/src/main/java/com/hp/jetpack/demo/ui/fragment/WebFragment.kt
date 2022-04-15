@@ -27,8 +27,6 @@ import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.model.WebViewModel
 import com.hp.jetpack.demo.util.CacheUtil
 import com.just.agentweb.AgentWeb
-import kotlinx.android.synthetic.main.fragment_web.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 
 
 /**
@@ -60,7 +58,7 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
                 mViewModel.collectType = CollectType.Ariticle.type
             }
             //点击首页轮播图进来的
-            getParcelable<BannerResponse>("bannerdata")?.let {
+            getParcelable<BannerResponse>("banner_data")?.let {
                 mViewModel.ariticleId = it.id
                 mViewModel.showTitle = it.title
                 //从首页轮播图 没法判断是否已经收藏过，所以直接默认没有收藏
@@ -87,7 +85,7 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
                 mViewModel.collectType = CollectType.Url.type
             }
         }
-        toolbar.run {
+        mDataBinding.toolbar.run {
             //设置menu 关键代码
             mActivity.setSupportActionBar(this)
             initClose(mViewModel.showTitle) {
@@ -102,7 +100,7 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
             }
         }
         preWeb = AgentWeb.with(this)
-            .setAgentWebParent(webContent, LinearLayout.LayoutParams(-1, -1))
+            .setAgentWebParent(mDataBinding.webContent, LinearLayout.LayoutParams(-1, -1))
             .useDefaultIndicator()
             .createAgentWeb()
             .ready()

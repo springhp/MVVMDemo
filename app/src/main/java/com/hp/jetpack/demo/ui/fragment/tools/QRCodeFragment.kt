@@ -6,7 +6,6 @@ import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.FragmentQrCodeBinding
-import kotlinx.android.synthetic.main.include_toolbar.*
 
 class QRCodeFragment : BaseFragment<BaseViewModel,FragmentQrCodeBinding>(){
 
@@ -14,7 +13,7 @@ class QRCodeFragment : BaseFragment<BaseViewModel,FragmentQrCodeBinding>(){
         arguments?.let {
             LogUtils.e(it.get("test"))
         }
-        toolbar.run {
+        mDataBinding.toolbar.run {
             title = "二维码扫描"
             mActivity.setSupportActionBar(this)
         }

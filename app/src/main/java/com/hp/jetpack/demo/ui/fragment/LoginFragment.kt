@@ -1,12 +1,12 @@
 package com.hp.jetpack.demo.ui.fragment
 
 import android.os.Bundle
+import com.blankj.utilcode.util.LogUtils
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.databinding.FragmentLoginBinding
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.model.LoginViewModel
-import kotlinx.android.synthetic.main.fragment_data.*
 
 class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
 
@@ -25,7 +25,7 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         mDataBinding.click = ProxyClick()
 
-        toolbar.apply {
+        mDataBinding.toolbar.apply {
             title = "登录"
             setNavigationIcon(R.drawable.ic_back)
             setNavigationOnClickListener {
@@ -34,5 +34,10 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
         }
     }
 
-
+    override fun createObserver() {
+        super.createObserver()
+        mViewModel.loginState.observe(this){
+            LogUtils.e(it)
+        }
+    }
 }

@@ -5,6 +5,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.base.activity.BaseVmActivity
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 
@@ -16,6 +17,9 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
 
     var exitTime = 0L
     override fun initView(savedInstanceState: Bundle?) {
+        immersionBar {
+            statusBarColor(R.color.colorPrimary)
+        }
         //TODO 延时加载初始化 meta-data当中加入了一个tools:node="remove"的标记
         //AppInitializer.getInstance(this).initializeComponent(LitePalInitializer::class.java)
 
