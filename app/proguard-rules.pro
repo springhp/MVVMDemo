@@ -22,5 +22,8 @@
 
 
 # bug收集
--dontwarn com.tencent.bugly.**
--keep public class com.tencent.bugly.**{*;}
+#-dontwarn com.tencent.bugly.**
+#-keep public class com.tencent.bugly.**{*;}
+
+-keep class androidx.recyclerview.widget.**{*;}
+-keep class androidx.viewpager2.widget.**{*;}

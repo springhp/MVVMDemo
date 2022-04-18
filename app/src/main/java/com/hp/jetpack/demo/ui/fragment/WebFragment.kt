@@ -29,12 +29,6 @@ import com.hp.jetpack.demo.util.CacheUtil
 import com.just.agentweb.AgentWeb
 
 
-/**
- * 作者　: hegaojian
- * 时间　: 2020/3/3
- * 描述　:
- */
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
 
     private var mAgentWeb: AgentWeb? = null

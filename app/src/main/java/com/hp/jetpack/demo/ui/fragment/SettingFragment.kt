@@ -7,12 +7,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.files.fileChooser
+import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.blankj.utilcode.util.AppUtils
@@ -27,6 +28,7 @@ import com.hp.jetpack.demo.databinding.FragmentSettingBinding
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.model.SettingViewModel
 import com.hp.jetpack.demo.ui.adapter.EnterpriseAdapter
+import com.hp.jetpack.demo.util.DialogUtils
 import com.hp.jetpack.demo.util.MySpUtils
 
 class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>() {
@@ -121,19 +123,53 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         fun lineChange() {
             // 正式环境，测试环境切换
             ToastUtils.showShort("环境切换成功")
+            DialogUtils.showCzDialog(activity) {
+
+            }.show()
             //RetrofitUrlManager.getInstance().setGlobalDomain("")
         }
 
         fun clearCache() {
             // TODO: 目前没有缓存，没法清理，没有测试过
             val size = CacheDiskUtils.getInstance().cacheSize
-            AlertDialog.Builder(mActivity).apply {
-                setTitle("清除缓存")
-                setCancelable(true)
-                setMessage("缓存大小:${size}M")
-                setNegativeButton("确定") { _, _ -> CacheDiskUtils.getInstance().clear() }
-                setPositiveButton("取消", null)
-            }.show()
+            context?.let {
+                MaterialDialog(it).show {
+                    title(R.string.clear_cashe)
+                    message(text = "缓存大小:${size}M")
+                    positiveButton(R.string.btn_ok) {
+                        LogUtils.e("确定")
+                    }
+                    negativeButton(R.string.btn_cancel) {
+                        LogUtils.e("取消")
+                    }
+                    lifecycleOwner(this@SettingFragment)
+                }
+
+//                MaterialDialog(it).show {
+//                    title(R.string.clear_cashe)
+//                    input(waitForPositiveButton = false, hint = "输入数字") { dialog, text ->
+//                        // Text changed
+//                    }
+//                    positiveButton(R.string.btn_ok)
+//                    positiveButton(R.string.btn_cancel)
+//                lifecycleOwner(this@SettingFragment)
+//                }
+//
+//                MaterialDialog(it).show {
+//                    fileChooser(context = it) { dialog, file ->
+//                        // File selected
+//                    }
+//                    lifecycleOwner(this@SettingFragment)
+//                }
+            }
+
+//            AlertDialog.Builder(mActivity).apply {
+//                setTitle("清除缓存")
+//                setCancelable(true)
+//                setMessage("缓存大小:${size}M")
+//                setNegativeButton("确定") { _, _ -> CacheDiskUtils.getInstance().clear() }
+//                setPositiveButton("取消", null)
+//            }.show()
         }
 
         fun modeChange() {

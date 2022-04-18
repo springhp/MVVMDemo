@@ -46,15 +46,15 @@ class QRCodeFragment : BaseFragment<BaseViewModel, FragmentQrCodeBinding>() {
                 .setScanViewType(QrConfig.SCANVIEW_TYPE_QRCODE) //设置扫描框类型（二维码还是条形码，默认为二维码）
                 .setCustombarcodeformat(QrConfig.BARCODE_I25) //此项只有在扫码类型为TYPE_CUSTOM时才有效
                 .setPlaySound(true) //是否扫描成功后bi~的声音
-                .setNeedCrop(true) //从相册选择二维码之后再次截取二维码
+                .setNeedCrop(false) //从相册选择二维码之后再次截取二维码
                 //.setDingPath(R.raw.test) //设置提示音(不设置为默认的Ding~)
                 .setIsOnlyCenter(true) //是否只识别框中内容(默认为全屏识别)
                 .setTitleText("扫描二维码") //设置Tilte文字
-                .setTitleBackgroudColor(Color.BLUE) //设置状态栏颜色
-                .setTitleTextColor(Color.BLACK) //设置Title文字颜色
+                .setTitleBackgroudColor(R.color.colorPrimary) //设置状态栏颜色
+                .setTitleTextColor(R.color.colorT1) //设置Title文字颜色
                 .setShowZoom(false) //是否手动调整焦距
-                .setAutoZoom(false) //是否自动调整焦距
-                .setFingerZoom(false) //是否开始双指缩放
+                .setAutoZoom(true) //是否自动调整焦距
+                .setFingerZoom(true) //是否开始双指缩放
                 .setScreenOrientation(QrConfig.SCREEN_PORTRAIT) //设置屏幕方向
                 .setDoubleEngine(false) //是否开启双引擎识别(仅对识别二维码有效，并且开启后只识别框内功能将失效)
                 .setOpenAlbumText("选择要识别的图片") //打开相册的文字

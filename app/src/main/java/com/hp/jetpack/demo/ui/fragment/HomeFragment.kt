@@ -32,10 +32,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun layoutId() = R.layout.fragment_home
 
     //recyclerview的底部加载view 因为在首页要动态改变他的颜色，所以加了他这个字段
-    private lateinit var footView: DefineLoadMoreView
+//    private lateinit var footView: DefineLoadMoreView
 
     override fun initView(savedInstanceState: Bundle?) {
         immersionBar {
+            statusBarColor(R.color.colorPrimary)
+            navigationBarColor(R.color.colorPrimary)
         }
         mDataBinding.toolbar.run {
             title = "首页"
@@ -62,9 +64,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         mDataBinding.recyclerView.init(LinearLayoutManager(context), articleAdapter).let {
             //因为首页要添加轮播图，所以我设置了firstNeedTop字段为false,即第一条数据不需要设置间距
             it.addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
-            footView = it.initFooter {
-                mViewModel.getHomeData(false)
-            }
+//            footView = it.initFooter {
+//                mViewModel.getHomeData(false)
+//            }
             //初始化FloatingActionButton
             //it.initFloatBtn(floatBtn)
         }

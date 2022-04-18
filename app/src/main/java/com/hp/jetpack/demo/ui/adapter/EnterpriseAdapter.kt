@@ -7,7 +7,9 @@ import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
 
 class EnterpriseAdapter(data: MutableList<EnterpriseBean>) :
     BaseQuickAdapter<EnterpriseBean, BaseViewHolder>(R.layout.item_enterprise, data) {
+
     override fun convert(holder: BaseViewHolder, item: EnterpriseBean) {
         holder.setText(R.id.tvText, item.text)
     }
+
 }
