@@ -1,14 +1,14 @@
 package com.hp.jetpack.demo.model
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.LogUtils
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
-import com.hp.jetpack.demo.data.bean.UserInfo
-import com.hp.jetpack.demo.ext.request
-import com.hp.jetpack.demo.ext.request2
 import com.hp.jetpack.demo.model.databind.StringObservableField
-import com.hp.jetpack.demo.network.apiService
-import com.hp.jetpack.demo.network.state.ResultState
-import com.hp.jetpack.demo.util.LogUtils
+import kotlinx.coroutines.launch
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.Socket
 
 class LoginViewModel() : BaseViewModel() {
     val nameField = StringObservableField("hp")
@@ -24,13 +24,32 @@ class LoginViewModel() : BaseViewModel() {
     }
 
     fun login(name: String, password: String) {
-        request2({
-                 apiService.login(name,password)
-        },{
-            loginState.postValue(true)
-        },{
-            loginState.postValue(false)
-        })
+        //        ws://data.90vs.com:8181/ws/
+        //data.90vs.com
+
+        viewModelScope.launch {
+            runCatching {
+                Thread{
+                    var socket = Socket("data.90vs.com",8181)
+                    var outputStream = socket.getOutputStream()
+                    val bufferedReaderIn: BufferedReader = BufferedReader(InputStreamReader(socket.getInputStream()))
+
+                    LogUtils.e(socket.isConnected)
+                    LogUtils.e(bufferedReaderIn.read())
+                }.start()
+            }.onSuccess {
+
+            }.onFailure {
+                LogUtils.e(it.message)
+            }
+        }
+//        request2({
+//                 apiService.login(name,password)
+//        },{
+//            loginState.postValue(true)
+//        },{
+//            loginState.postValue(false)
+//        })
 //        request({
 //            apiService.login(name, password)
 //        }, loginState, true, "登陆中...")

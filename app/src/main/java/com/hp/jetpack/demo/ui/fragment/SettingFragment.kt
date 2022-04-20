@@ -7,13 +7,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.files.fileChooser
-import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.blankj.utilcode.util.AppUtils
@@ -27,6 +26,9 @@ import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
 import com.hp.jetpack.demo.databinding.FragmentSettingBinding
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.model.SettingViewModel
+import com.hp.jetpack.demo.ui.activity.RoomActivity
+import com.hp.jetpack.demo.ui.activity.TestActivity
+import com.hp.jetpack.demo.ui.activity.WorkManagerActivity
 import com.hp.jetpack.demo.ui.adapter.EnterpriseAdapter
 import com.hp.jetpack.demo.util.DialogUtils
 import com.hp.jetpack.demo.util.MySpUtils
@@ -53,6 +55,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         mDataBinding.tvEnterprise.text = MySpUtils.enterpriseName
 
         mDataBinding.tvVersion.text = AppUtils.getAppVersionName()
+
     }
 
     override fun createObserver() {
@@ -178,16 +181,43 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             //MODE_NIGHT_FOLLOW_SYSTEM 跟随系统
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
+        fun js() {
+
+            launch.launch(
+                Intent(
+                    mActivity, TestActivity::
+                    class.java
+                )
+            )
+        }
+
+        fun workManager() {
+            startActivity(Intent(mActivity, WorkManagerActivity::class.java))
+        }
+
+        fun room() {
+            startActivity(Intent(mActivity, RoomActivity::class.java))
+        }
     }
 
-    //TODO 文件下载更新
-    class DownloadBroadcastReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
-                val dwnId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0)
-                // TODO: 下载完成，安装程序
-                LogUtils.e(dwnId)
+    var launch =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { it ->
+            var intent = it.data;
+            intent?.let { i ->
+                LogUtils.e(i.getStringExtra("return_data"))
             }
+        }
+}
+
+//TODO 文件下载更新
+class DownloadBroadcastReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent?.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
+            val dwnId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0)
+            // TODO: 下载完成，安装程序
+            LogUtils.e(dwnId)
         }
     }
 }
+

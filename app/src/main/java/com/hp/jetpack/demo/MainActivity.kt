@@ -4,12 +4,18 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.base.activity.BaseVmActivity
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.permissionx.guolindev.PermissionX
+import org.java_websocket.client.WebSocketClient
+import org.java_websocket.drafts.Draft_6455
+import org.java_websocket.handshake.ServerHandshake
+import java.net.URI
+
 
 class MainActivity : BaseVmActivity<BaseViewModel>() {
     override fun layoutId() = R.layout.activity_main
@@ -44,6 +50,19 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
                 }
             }
         })
+
+        val uri = URI.create("ws://121.40.165.18:8800")
+        var client = JWebSocketClient(uri);
+        try {
+            client.connectBlocking()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        if (client != null && client.isOpen) {
+            LogUtils.e("你好")
+            client.send("你好");
+        }
     }
 
     override fun onResume() {
@@ -78,5 +97,26 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
 
         }
 
+    }
+
+    class JWebSocketClient(serverUri: URI?) :
+
+        WebSocketClient(serverUri, Draft_6455()) {
+        override fun onOpen(handshakedata: ServerHandshake) {
+            LogUtils.e("onOpen")
+        }
+
+        override fun onMessage(message: String) {
+            LogUtils.e("onMessage")
+            LogUtils.e(message)
+        }
+
+        override fun onClose(code: Int, reason: String, remote: Boolean) {
+            LogUtils.e("onClose")
+        }
+
+        override fun onError(ex: Exception) {
+            LogUtils.e("onError")
+        }
     }
 }

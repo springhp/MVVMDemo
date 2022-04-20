@@ -2,6 +2,7 @@ package com.hp.jetpack.demo.app
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
+import com.hp.jetpack.demo.database.DataBaseManager
 import com.hp.jetpack.demo.network.ApiService
 import com.hp.jetpack.demo.weight.loadCallBack.EmptyCallback
 import com.hp.jetpack.demo.weight.loadCallBack.ErrorCallback
@@ -16,6 +17,7 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Utils.init(this)
+
         MMKV.initialize(this)
 
         CrashReport.initCrashReport(this, "c849d7a0-6d0e-46e1-8c82-3934b7b0f31a", true);
@@ -28,5 +30,6 @@ class MyApp : Application() {
             .addCallback(EmptyCallback())//空
             .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
             .commit()
+
     }
 }
