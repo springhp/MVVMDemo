@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/app_name"
+        android:shortcutId="static1"
+        android:shortcutLongLabel="@string/app_name"
+        android:shortcutShortLabel="@string/app_name">
+
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.hp.jetpack.demo.MainActivity"
+            android:targetPackage="com.hp.jetpack.demo" /> <!-- application id -->
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.hp.jetpack.demo.ui.activity.TestActivity"
+            android:targetPackage="com.hp.jetpack.demo" /> <!-- application id -->
+    </shortcut>
+
+</shortcuts>

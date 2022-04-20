@@ -38,6 +38,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <provider
@@ -70,6 +74,21 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public" />
         </provider>
+
+        <receiver
+            android:name=".ui.widget.MyAppWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="action_led_on" />
+                <action android:name="action_led_off" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.AppWidgetProvider"
+                android:resource="@xml/app_widget_provider_info">
+
+            </meta-data>
+        </receiver>
     </application>
 
 </manifest>
