@@ -10,6 +10,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -78,10 +79,12 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         val adapter = EnterpriseAdapter(data)
 
         val dialog = MaterialDialog(mActivity, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            customListAdapter(adapter)
+            customListAdapter(
+                adapter,
+                LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
+            )
             lifecycleOwner(this@SettingFragment)
         }
-
         adapter.setOnItemClickListener { _, _, position ->
             val bean = data[position]
             MySpUtils.enterpriseID = bean.id

@@ -51,18 +51,18 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
             }
         })
 
-        val uri = URI.create("ws://121.40.165.18:8800")
-        var client = JWebSocketClient(uri);
-        try {
-            client.connectBlocking()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
-        if (client != null && client.isOpen) {
-            LogUtils.e("你好")
-            client.send("你好");
-        }
+//        val uri = URI.create("ws://121.40.165.18:8800")
+//        var client = JWebSocketClient(uri);
+//        try {
+//            client.connectBlocking()
+//        } catch (e: InterruptedException) {
+//            e.printStackTrace()
+//        }
+//
+//        if (client != null && client.isOpen) {
+//            LogUtils.e("你好")
+//            client.send("你好");
+//        }
     }
 
     override fun onResume() {

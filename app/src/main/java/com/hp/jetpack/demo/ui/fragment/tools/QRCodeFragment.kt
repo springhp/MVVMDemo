@@ -2,8 +2,6 @@ package com.hp.jetpack.demo.ui.fragment.tools
 
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
-import androidx.test.core.app.ApplicationProvider
 import cn.bertsir.zbar.QrConfig
 import cn.bertsir.zbar.QrManager
 import cn.bertsir.zbar.view.ScanLineView
@@ -12,6 +10,8 @@ import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.FragmentQrCodeBinding
+import com.hp.jetpack.demo.ext.initClose
+import com.hp.jetpack.demo.ext.nav
 
 
 class QRCodeFragment : BaseFragment<BaseViewModel, FragmentQrCodeBinding>() {
@@ -22,10 +22,13 @@ class QRCodeFragment : BaseFragment<BaseViewModel, FragmentQrCodeBinding>() {
         arguments?.let {
             LogUtils.e(it.get("test"))
         }
-        mDataBinding.toolbar.run {
-            title = "二维码扫描"
-            mActivity.setSupportActionBar(this)
+        mDataBinding.toolbar.initClose(titleStr = "二维码") {
+            nav().navigateUp()
         }
+//        mDataBinding.toolbar.run {
+//            title = "二维码扫描"
+//            mActivity.setSupportActionBar(this)
+//        }
     }
 
     override fun layoutId(): Int = R.layout.fragment_qr_code

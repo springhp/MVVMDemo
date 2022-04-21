@@ -4,10 +4,10 @@
     <shortcut
         android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:shortcutDisabledMessage="@string/app_name"
+        android:shortcutDisabledMessage="@string/test"
         android:shortcutId="static1"
-        android:shortcutLongLabel="@string/app_name"
-        android:shortcutShortLabel="@string/app_name">
+        android:shortcutLongLabel="@string/test"
+        android:shortcutShortLabel="@string/test">
 
         <intent
             android:action="android.intent.action.MAIN"

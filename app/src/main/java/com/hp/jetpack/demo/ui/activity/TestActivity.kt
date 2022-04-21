@@ -3,10 +3,12 @@ package com.hp.jetpack.demo.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.blankj.utilcode.util.LogUtils
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseActivity
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.ActivityTestBinding
+import com.hp.jetpack.demo.ext.initClose
 
 class TestActivity : BaseActivity<BaseViewModel, ActivityTestBinding>() {
 
@@ -23,6 +25,9 @@ class TestActivity : BaseActivity<BaseViewModel, ActivityTestBinding>() {
             setResult(Activity.RESULT_OK,intent)
             finish()
         }
+        mDataBinding.toolbar.initClose(titleStr = "测试", backImg = R.drawable.ic_back, onBack = {
+            finish()
+        })
     }
 
 }

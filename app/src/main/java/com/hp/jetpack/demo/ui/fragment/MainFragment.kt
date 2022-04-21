@@ -24,16 +24,13 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                             HomeFragment()
                         }
                         1 -> {
-                            LoginFragment()
+                            ProjectFragment()
                         }
                         2 -> {
                             DataFragment()
                         }
                         3 -> {
                             VisitorFragment()
-                        }
-                        4 -> {
-                            SettingFragment()
                         }
                         else -> {
                             SettingFragment()
@@ -54,19 +51,19 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                     mDataBinding.mainViewpager.setCurrentItem(1, false)
                 }
                 R.id.menu_system -> {
-                    mDataBinding.mainViewpager.setCurrentItem(3, false)
+                    mDataBinding.mainViewpager.setCurrentItem(2, false)
                 }
                 R.id.menu_public -> {
-                    mDataBinding.mainViewpager.setCurrentItem(4, false)
+                    mDataBinding.mainViewpager.setCurrentItem(3, false)
                 }
                 else -> {
-                    mDataBinding.mainViewpager.setCurrentItem(5, false)
+                    mDataBinding.mainViewpager.setCurrentItem(4, false)
                 }
             }
             return@setOnItemSelectedListener true
         }
 
-//        mainBottom.selectedItemId = R.id.menu_public //会导致状态栏变白色
+        mDataBinding.mainBottom.selectedItemId = R.id.menu_project
 
     }
 }
