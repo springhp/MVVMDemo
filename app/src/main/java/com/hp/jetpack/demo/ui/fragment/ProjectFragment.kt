@@ -25,6 +25,7 @@ class ProjectFragment : BaseFragment<BaseViewModel, FragmentProjectBinding>() {
         mDataBinding.magicIndicator.navigator.notifyDataSetChanged()
         mDataBinding.viewpage.adapter?.notifyDataSetChanged()
         mDataBinding.viewpage.offscreenPageLimit = fragments.size
+
     }
 
 
