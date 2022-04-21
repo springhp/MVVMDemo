@@ -6,12 +6,14 @@
         <entry key="..\:/spring/JepackDemo/app/src/main/res/drawable/bg_btn.xml" value="0.1945" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/drawable/bg_et.xml" value="0.1945" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/drawable/et_bg_cz.xml" value="0.199" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_laucher.xml" value="0.18489583333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_list_widget.xml" value="0.19114583333333332" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_room.xml" value="0.18645833333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_test.xml" value="0.19114583333333332" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_visitor.xml" value="0.18645833333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/activity_work_manager.xml" value="0.19114583333333332" />
+        <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/banner_launcher.xml" value="0.19114583333333332" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/dialog_weight_cz.xml" value="0.19114583333333332" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/fragment_data.xml" value="0.18645833333333334" />
         <entry key="..\:/spring/JepackDemo/app/src/main/res/layout/fragment_home.xml" value="0.18645833333333334" />

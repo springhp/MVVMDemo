@@ -22,16 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackDemo">
         <activity
-            android:name=".ui.activity.TestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.WorkManagerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.RoomActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +34,18 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity
+            android:name=".ui.activity.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.WorkManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.RoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"></activity>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -74,7 +77,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public" />
         </provider>
-
     </application>
 
 </manifest>

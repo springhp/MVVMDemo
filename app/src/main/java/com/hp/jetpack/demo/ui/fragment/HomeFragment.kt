@@ -1,10 +1,12 @@
 package com.hp.jetpack.demo.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ConvertUtils
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
@@ -13,12 +15,12 @@ import com.hp.jetpack.demo.databinding.FragmentHomeBinding
 import com.hp.jetpack.demo.ext.*
 import com.hp.jetpack.demo.model.HomeViewModel
 import com.hp.jetpack.demo.ui.adapter.AriticleAdapter
-import com.hp.jetpack.demo.weight.banner.HomeBannerAdapter
-import com.hp.jetpack.demo.weight.banner.HomeBannerViewHolder
-import com.hp.jetpack.demo.weight.recyclerview.DefineLoadMoreView
 import com.hp.jetpack.demo.weight.recyclerview.SpaceItemDecoration
 import com.kingja.loadsir.core.LoadService
-import com.zhpan.bannerview.BannerViewPager
+import com.youth.banner.Banner
+import com.youth.banner.adapter.BannerImageAdapter
+import com.youth.banner.holder.BannerImageHolder
+import com.youth.banner.indicator.CircleIndicator
 
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -80,7 +82,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         mViewModel.getHomeData(true)
     }
 
-    @SuppressLint("InflateParams")
     override fun createObserver() {
         super.createObserver()
         mViewModel.run {
@@ -100,25 +101,25 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     if (mDataBinding.recyclerView.headerCount == 0) {
                         val headView =
                             LayoutInflater.from(context).inflate(R.layout.include_banner, null)
-                                .apply {
-                                    findViewById<BannerViewPager<BannerResponse, HomeBannerViewHolder>>(
-                                        R.id.banner_view
-                                    ).apply {
-                                        adapter = HomeBannerAdapter()
-                                        setLifecycleRegistry(lifecycle)
-                                        setOnPageClickListener {
-                                            nav().navigateAction(
-                                                R.id.action_to_webFragment,
-                                                Bundle().apply {
-                                                    putParcelable(
-                                                        "banner_data",
-                                                        data[it]
-                                                    )
-                                                })
-                                        }
-                                        create(data)
-                                    }
-                                }
+
+                        var banner: Banner<BannerResponse, BannerImageAdapter<BannerResponse>> =
+                            headView.findViewById(R.id.banner_view)
+
+                        banner.setAdapter(object : BannerImageAdapter<BannerResponse>(data) {
+                            override fun onBindView(
+                                holder: BannerImageHolder,
+                                data: BannerResponse,
+                                position: Int,
+                                size: Int
+                            ) {
+                                //图片加载自己实现
+                                Glide.with(holder.itemView)
+                                    .load(data.imagePath)
+                                    .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+                                    .into(holder.imageView)
+                            }
+                        }).addBannerLifecycleObserver(this@HomeFragment).indicator =
+                            CircleIndicator(mActivity)
                         mDataBinding.recyclerView.addHeaderView(headView)
                         mDataBinding.recyclerView.scrollToPosition(0)
                     }
