@@ -34,15 +34,12 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
             finish()
             return
         }
-
         if (CacheUtil.isFirst()) {
             CacheUtil.setFirst(false)
             mDataBinding.welcomeImage.gone()
             mDataBinding.banner.apply {
                 val launcherBannerAdapter = LauncherBannerAdapter(resList)
                 setAdapter(launcherBannerAdapter, false)
-                setIndicatorNormalColorRes(R.color.colorT1)
-                setIndicatorSelectedColorRes(R.color.colorPrimary)
                 addBannerLifecycleObserver(this@LauncherActivity)
                 indicator = CircleIndicator(this@LauncherActivity)
                 isAutoLoop(false)
@@ -80,6 +77,7 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
     inner class ProxyClick {
         fun gotoMain() {
             startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
+            finish()
         }
     }
 }

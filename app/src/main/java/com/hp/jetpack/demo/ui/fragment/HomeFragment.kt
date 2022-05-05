@@ -73,6 +73,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             //it.initFloatBtn(floatBtn)
         }
 
+        articleAdapter.run {
+            setOnItemClickListener { _, _, position ->
+                position.toString().logE()
+                nav().navigateAction(R.id.action_to_webFragment, Bundle().apply {
+                    putParcelable(
+                        "ariticleData",
+                        articleAdapter.data[position - 1]
+                        //1为head
+                    )
+                })
+            }
+        }
     }
 
     override fun lazyLoadData() {

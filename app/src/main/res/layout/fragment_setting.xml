@@ -152,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:onClick="@{()->click.js()}"
+            android:onClick="@{()->click.activityResult()}"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:text="ActivityResult"
@@ -180,6 +180,30 @@
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:text="Room"
+            android:textSize="16sp" />
+
+        <View style="@style/LineHorizontalML12" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->click.gotoMine()}"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:text="Mine"
+            android:textSize="16sp" />
+
+        <View style="@style/LineHorizontalML12" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->click.js()}"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:text="生物解锁"
             android:textSize="16sp" />
 
         <View style="@style/LineHorizontalML12" />

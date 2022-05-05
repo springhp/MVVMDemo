@@ -5,21 +5,23 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.hardware.biometrics.BiometricPrompt
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.CancellationSignal
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getMainExecutor
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.customListAdapter
-import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.CacheDiskUtils
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.*
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
@@ -151,6 +153,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                     lifecycleOwner(this@SettingFragment)
                 }
 
+
 //                MaterialDialog(it).show {
 //                    title(R.string.clear_cashe)
 //                    input(waitForPositiveButton = false, hint = "输入数字") { dialog, text ->
@@ -169,6 +172,8 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 //                }
             }
 
+
+
 //            AlertDialog.Builder(mActivity).apply {
 //                setTitle("清除缓存")
 //                setCancelable(true)
@@ -185,8 +190,39 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
+        @RequiresApi(Build.VERSION_CODES.P)
         fun js() {
 
+            val cancellationSignal = CancellationSignal()
+            BiometricPrompt.Builder(Utils.getApp()).apply {
+                setTitle("test")
+                setNegativeButton("确定", getMainExecutor(mActivity)) { listener, z ->
+                    LogUtils.e("$z")
+                }
+            }.build().authenticate(
+                cancellationSignal, getMainExecutor(mActivity),
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
+                        super.onAuthenticationError(errorCode, errString)
+                        LogUtils.e(errString)
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        LogUtils.e("onAuthenticationFailed")
+                    }
+
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+                        super.onAuthenticationSucceeded(result)
+                        LogUtils.e("onAuthenticationSucceeded")
+                    }
+                }
+            )
+
+
+        }
+
+        fun activityResult(){
             launch.launch(
                 Intent(
                     mActivity, TestActivity::
@@ -201,6 +237,10 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 
         fun room() {
             startActivity(Intent(mActivity, RoomActivity::class.java))
+        }
+
+        fun gotoMine() {
+            nav().navigate(R.id.mine_fragment)
         }
     }
 

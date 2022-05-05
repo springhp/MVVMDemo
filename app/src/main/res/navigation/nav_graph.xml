@@ -57,4 +57,10 @@
         tools:layout="@layout/fragment_setting"
         android:label="QRCodeFragment" />
 
+    <fragment
+        android:id="@+id/mine_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.MineFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine">
+    </fragment>
 </navigation>
