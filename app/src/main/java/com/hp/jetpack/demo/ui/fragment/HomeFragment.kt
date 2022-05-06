@@ -2,8 +2,11 @@ package com.hp.jetpack.demo.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ConvertUtils
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -15,21 +18,25 @@ import com.hp.jetpack.demo.databinding.FragmentHomeBinding
 import com.hp.jetpack.demo.ext.*
 import com.hp.jetpack.demo.model.HomeViewModel
 import com.hp.jetpack.demo.ui.adapter.AriticleAdapter
+import com.hp.jetpack.demo.ui.adapter.AriticlePagingAdapter
 import com.hp.jetpack.demo.weight.recyclerview.SpaceItemDecoration
 import com.kingja.loadsir.core.LoadService
 import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     //适配器
-    private val articleAdapter: AriticleAdapter by lazy { AriticleAdapter(arrayListOf(), true) }
+//    private val articleAdapter: AriticleAdapter by lazy { AriticleAdapter(arrayListOf(), true) }
 
+    private val articleAdapter: AriticlePagingAdapter by lazy { AriticlePagingAdapter() }
     //界面状态管理者
-    private lateinit var loadSir: LoadService<Any>
+    //private lateinit var loadSir: LoadService<Any>
 
     override fun layoutId() = R.layout.fragment_home
 
@@ -57,12 +64,33 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
 
-        loadSir = loadServiceInit(mDataBinding.swipeRefresh) {
-            loadSir.showLoading()
-            mViewModel.getBannerData()
-            mViewModel.getHomeData(true)
+//        loadSir = loadServiceInit(mDataBinding.swipeRefresh) {
+//            loadSir.showLoading()
+//            mViewModel.getBannerData()
+//
+////            mViewModel.getHomeData(true)
+//        }
+        lifecycleScope.launch {
+            mViewModel.getData().collectLatest {
+                LogUtils.e("====")
+                articleAdapter.submitData(it)
+                //LogUtils.e(articleAdapter.getItemId(0))
+            }
         }
 
+        articleAdapter.addLoadStateListener {
+            when(it.refresh){
+                is LoadState.Loading ->{
+                    LogUtils.e("Loading")
+                }
+                is LoadState.Error ->{
+                    LogUtils.e("Error")
+                }
+                is LoadState.NotLoading ->{
+                    LogUtils.e("NotLoading")
+                }
+            }
+        }
         mDataBinding.recyclerView.init(LinearLayoutManager(context), articleAdapter).let {
             //因为首页要添加轮播图，所以我设置了firstNeedTop字段为false,即第一条数据不需要设置间距
             it.addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
@@ -73,25 +101,25 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             //it.initFloatBtn(floatBtn)
         }
 
-        articleAdapter.run {
-            setOnItemClickListener { _, _, position ->
-                position.toString().logE()
-                nav().navigateAction(R.id.action_to_webFragment, Bundle().apply {
-                    putParcelable(
-                        "ariticleData",
-                        articleAdapter.data[position - 1]
-                        //1为head
-                    )
-                })
-            }
-        }
+//        articleAdapter.run {
+//            setOnItemClickListener { _, _, position ->
+//                position.toString().logE()
+//                nav().navigateAction(R.id.action_to_webFragment, Bundle().apply {
+//                    putParcelable(
+//                        "ariticleData",
+//                        articleAdapter.data[position - 1]
+//                        //1为head
+//                    )
+//                })
+//            }
+//        }
     }
 
     override fun lazyLoadData() {
         super.lazyLoadData()
-        loadSir.showLoading()
+        //loadSir.showLoading()
         mViewModel.getBannerData()
-        mViewModel.getHomeData(true)
+//        mViewModel.getHomeData(true)
     }
 
     override fun createObserver() {
@@ -99,13 +127,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         mViewModel.run {
             homeDataState.observe(viewLifecycleOwner) {
                 //设值 新写了个拓展函数，搞死了这个恶心的重复代码
-                loadListData(
-                    it,
-                    articleAdapter,
-                    loadSir,
-                    mDataBinding.recyclerView,
-                    mDataBinding.swipeRefresh
-                )
+//                loadListData(
+//                    it,
+//                    articleAdapter,
+//                    loadSir,
+//                    mDataBinding.recyclerView,
+//                    mDataBinding.swipeRefresh
+//                )
             }
 
             bannerData.observe(viewLifecycleOwner) { resultState ->

@@ -138,6 +138,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         }
 
         fun clearCache() {
+
             // TODO: 目前没有缓存，没法清理，没有测试过
             val size = CacheDiskUtils.getInstance().cacheSize
             context?.let {
@@ -147,6 +148,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                     positiveButton(R.string.btn_ok) {
                         LogUtils.e("确定")
                     }
+                    cancelOnTouchOutside(false)
                     negativeButton(R.string.btn_cancel) {
                         LogUtils.e("取消")
                     }
@@ -187,7 +189,8 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             //MODE_NIGHT_NO 亮色模式
             //MODE_NIGHT_YES 暗色模式
             //MODE_NIGHT_FOLLOW_SYSTEM 跟随系统
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            LogUtils.e(AppCompatDelegate.getDefaultNightMode())
         }
 
         @RequiresApi(Build.VERSION_CODES.P)

@@ -1,9 +1,12 @@
 package com.hp.jetpack.demo.model
 
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.data.bean.AriticleResponse
 import com.hp.jetpack.demo.data.bean.BannerResponse
+import com.hp.jetpack.demo.data.datasource.TestDataSource
 import com.hp.jetpack.demo.ext.request
 import com.hp.jetpack.demo.network.apiService
 import com.hp.jetpack.demo.network.state.ListDataUiState
@@ -12,6 +15,7 @@ import com.hp.jetpack.demo.network.state.ResultState
 class HomeViewModel : BaseViewModel() {
     //页码 首页数据页码从0开始
     var pageNo = 0
+
     //首页轮播图数据
     var bannerData: MutableLiveData<ResultState<ArrayList<BannerResponse>>> = MutableLiveData()
 
@@ -24,6 +28,12 @@ class HomeViewModel : BaseViewModel() {
     fun getBannerData() {
         request({ apiService.getBanner() }, bannerData)
     }
+
+    fun getData() =
+        Pager(PagingConfig(pageSize = 1)) {
+            TestDataSource(service = apiService)
+        }.flow
+
 
     /**
      * 获取首页文章列表数据

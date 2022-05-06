@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_weight">78sp</dimen>
+    <dimen name="toolbar_title_font">18sp</dimen>
+    <dimen name="sp_title">17sp</dimen>
+    <dimen name="sp_content">14sp</dimen>
+    <dimen name="sp_sub_title">12sp</dimen>
+</resources>

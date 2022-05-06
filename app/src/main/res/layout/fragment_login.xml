@@ -51,6 +51,7 @@
             android:layout_marginRight="24dp"
             android:background="@drawable/bg_et"
             android:hint="密码"
+            android:inputType="textPassword"
             android:paddingLeft="16dp"
             android:text="@{model.passwordField}"
             app:layout_constraintTop_toBottomOf="@id/et_name" />
@@ -76,5 +77,26 @@
             android:onClick="@{()->click.register()}"
             android:text="注册"
             app:layout_constraintTop_toBottomOf="@id/btn_ok" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第一个" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第二个" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第三个" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
 </layout>

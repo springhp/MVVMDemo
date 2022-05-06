@@ -2,6 +2,7 @@ package com.hp.jetpack.demo.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.MainActivity
 import com.hp.jetpack.demo.R
@@ -24,9 +25,9 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        immersionBar {
-            statusBarColor(R.color.white)
-        }
+        // TODO: 设置默认的模式，公司平板有问题
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         mDataBinding.click = ProxyClick()
 
         //防止出现按Home键回到桌面时，再次点击重新进入该界面bug

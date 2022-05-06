@@ -26,197 +26,209 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="设置" />
 
-        <LinearLayout
-            android:id="@+id/llEnterprise"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp">
-
-            <TextView
-                android:layout_width="80dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="企业"
-                android:textSize="16sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvEnterprise"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="企业"
-                android:textColor="@color/colorT1"
-                android:textSize="16sp" />
+                <LinearLayout
+                    android:id="@+id/llEnterprise"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp">
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginRight="12dp"
-                android:src="@drawable/ic_right" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="企业"
+                        android:textSize="16sp" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvEnterprise"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="企业"
+                        android:textColor="@color/colorT1"
+                        android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="12dp"
+                        android:src="@drawable/ic_right" />
 
-        <LinearLayout
-            android:id="@+id/llVersion"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.downloadApp()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp">
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="版本号"
-                android:textSize="16sp" />
+                <View style="@style/LineHorizontalML12" />
 
-            <TextView
-                android:id="@+id/tvVersion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="1.0.0"
-                android:textColor="@color/colorT1"
-                android:textSize="16sp" />
+                <LinearLayout
+                    android:id="@+id/llVersion"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.downloadApp()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp">
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginRight="12dp"
-                android:src="@drawable/ic_right" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="版本号"
+                        android:textSize="16sp" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvVersion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="1.0.0"
+                        android:textColor="@color/colorT1"
+                        android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="12dp"
+                        android:src="@drawable/ic_right" />
 
-        <TextView
-            android:id="@+id/tvShare"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.share()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="分享"
-            android:textSize="16sp"></TextView>
+                </LinearLayout>
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:id="@+id/tvLineChange"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.lineChange()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="环境切换"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.share()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="分享"
+                    android:textSize="16sp"></TextView>
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:id="@+id/tv_clear_cache"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.clearCache()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="清理缓存"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvLineChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.lineChange()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="环境切换"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:id="@+id/tv_dark"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.modeChange()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="深色模式"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_clear_cache"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.clearCache()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="清理缓存"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:id="@+id/tv_js"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.activityResult()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="ActivityResult"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.modeChange()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="深色模式"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.workManager()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="WorkManager"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_js"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.activityResult()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="ActivityResult"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.room()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="Room"
-            android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.workManager()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="WorkManager"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.gotoMine()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="Mine"
-            android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.room()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="Room"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:onClick="@{()->click.js()}"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:text="生物解锁"
-            android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.gotoMine()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="Mine"
+                    android:textSize="16sp" />
 
-        <View style="@style/LineHorizontalML12" />
+                <View style="@style/LineHorizontalML12" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="24dp"
-            android:background="@color/purple_500"
-            android:onClick="@{()->click.logout()}"
-            android:text="退出登录"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->click.js()}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:text="生物解锁"
+                    android:textSize="16sp" />
+
+                <View style="@style/LineHorizontalML12" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="24dp"
+                    android:background="@color/purple_500"
+                    android:onClick="@{()->click.logout()}"
+                    android:text="退出登录"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 </layout>

@@ -23,6 +23,7 @@
         android:theme="@style/Theme.JetpackDemo">
         <activity
             android:name=".ui.activity.LauncherActivity"
+            android:theme="@style/Theme.Fullscreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,10 +64,10 @@
 
         <meta-data
             android:name="design_width_in_dp"
-            android:value="400" />
+            android:value="800" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="680" />
+            android:value="442" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
