@@ -63,4 +63,18 @@
         android:label="MineFragment"
         tools:layout="@layout/fragment_mine">
     </fragment>
+
+    <fragment
+        android:id="@+id/smart_refresh_layout_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.SmartRefreshLayoutFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine">
+    </fragment>
+
+    <fragment
+        android:id="@+id/city_picker_fragment"
+        android:name="com.hp.jetpack.demo.ui.fragment.CityPickerFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_city_picker">
+    </fragment>
 </navigation>

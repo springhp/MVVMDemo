@@ -245,6 +245,10 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         fun gotoMine() {
             nav().navigate(R.id.mine_fragment)
         }
+
+        fun smartRefreshLayout(){
+            nav().navigate(R.id.smart_refresh_layout_fragment)
+        }
     }
 
     var launch =

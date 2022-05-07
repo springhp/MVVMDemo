@@ -2,16 +2,21 @@ package com.hp.jetpack.demo.app
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
-import com.hp.jetpack.demo.database.DataBaseManager
+import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.network.ApiService
 import com.hp.jetpack.demo.weight.loadCallBack.EmptyCallback
 import com.hp.jetpack.demo.weight.loadCallBack.ErrorCallback
 import com.hp.jetpack.demo.weight.loadCallBack.LoadingCallback
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
+
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -31,5 +36,17 @@ class MyApp : Application() {
             .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
             .commit()
 
+    }
+
+    companion object {
+        init {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator{context, layout ->
+                layout.setPrimaryColorsId(R.color.windowBackground, R.color.colorT1)
+                ClassicsHeader(context)
+            }
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ ->
+                ClassicsFooter(context).setDrawableSize(20f)
+            }
+        }
     }
 }
