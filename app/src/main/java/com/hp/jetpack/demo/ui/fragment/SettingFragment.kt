@@ -6,6 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.hardware.biometrics.BiometricPrompt
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -38,8 +41,19 @@ import com.hp.jetpack.demo.util.MySpUtils
 
 class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>() {
     override fun layoutId(): Int = R.layout.fragment_setting
-
+    lateinit var soundPool: SoundPool
+    var soundID = 0
     override fun initView(savedInstanceState: Bundle?) {
+        soundPool = SoundPool.Builder().apply {
+            setMaxStreams(2) // //传入最多播放音频数量
+            val attrBuilder: AudioAttributes.Builder = AudioAttributes.Builder()
+            attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC)
+            setAudioAttributes(attrBuilder.build())
+        }.build()
+        soundID = soundPool.load(context, cn.bertsir.zbar.R.raw.qrcode, 1)
+
+        LogUtils.e(soundID)
+
         immersionBar {
         }
 
@@ -116,7 +130,13 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         }
 
         fun logout() {
-            nav().navigate(R.id.login_fragment)
+
+        }
+
+        fun soundPool() {
+            //先加载声音,加载需要点时间
+            soundPool.play(soundID, 1F, 1F, 1, 0, 1F)
+            //soundPool.release()
         }
 
         fun share() {
@@ -175,7 +195,6 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             }
 
 
-
 //            AlertDialog.Builder(mActivity).apply {
 //                setTitle("清除缓存")
 //                setCancelable(true)
@@ -225,7 +244,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
 
         }
 
-        fun activityResult(){
+        fun activityResult() {
             launch.launch(
                 Intent(
                     mActivity, TestActivity::
@@ -246,7 +265,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
             nav().navigate(R.id.mine_fragment)
         }
 
-        fun smartRefreshLayout(){
+        fun smartRefreshLayout() {
             nav().navigate(R.id.smart_refresh_layout_fragment)
         }
     }
@@ -258,6 +277,11 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
                 LogUtils.e(i.getStringExtra("return_data"))
             }
         }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
+    }
 }
 
 //TODO 文件下载更新
