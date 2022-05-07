@@ -28,6 +28,17 @@ interface ApiService {
         @Field("password") pwd: String
     ): ApiResponse<UserInfo>
 
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") pwd: String,
+        @Field("repassword") repassword: String
+    ): ApiResponse<UserInfo>
+
     @Headers("Domain-Name: zongheng")
     @POST("learun/adms/vm/vor/bevisitedenterprisedateitem")
     suspend fun getEnterprise(): BaseResult<List<EnterpriseBean>>

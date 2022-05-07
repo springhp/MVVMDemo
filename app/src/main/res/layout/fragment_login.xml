@@ -24,11 +24,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            app:titleTextColor="@color/white"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:background="?attr/colorPrimary" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_name"
@@ -63,8 +61,10 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
-            android:onClick="@{()->click.login()}"
+            android:background="@color/colorPrimary"
+            android:onClick="@{()->click.register()}"
             android:text="登陆"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/et_password" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -74,29 +74,11 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
+            android:background="@color/colorPrimary"
             android:onClick="@{()->click.register()}"
             android:text="注册"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btn_ok" />
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="第一个" />
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="第二个" />
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="第三个" />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
 </layout>

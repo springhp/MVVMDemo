@@ -130,7 +130,7 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
         }
 
         fun logout() {
-
+            nav().navigate(R.id.login_fragment)
         }
 
         fun soundPool() {

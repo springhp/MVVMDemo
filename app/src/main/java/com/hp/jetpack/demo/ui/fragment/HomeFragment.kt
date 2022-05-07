@@ -7,18 +7,14 @@ import com.blankj.utilcode.util.ConvertUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.data.bean.BannerResponse
-import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
 import com.hp.jetpack.demo.databinding.FragmentHomeBinding
 import com.hp.jetpack.demo.ext.*
 import com.hp.jetpack.demo.model.HomeViewModel
 import com.hp.jetpack.demo.ui.adapter.AriticleAdapter
-import com.hp.jetpack.demo.ui.adapter.EnterpriseAdapter
 import com.hp.jetpack.demo.weight.recyclerview.SpaceItemDecoration
 import com.kingja.loadsir.core.LoadService
 import com.youth.banner.Banner
@@ -32,14 +28,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     //适配器
     private val articleAdapter: AriticleAdapter by lazy { AriticleAdapter(arrayListOf(), true) }
 
-//    private val articleAdapter: AriticlePagingAdapter by lazy { AriticlePagingAdapter() }
     //界面状态管理者
     private lateinit var loadSir: LoadService<Any>
 
     override fun layoutId() = R.layout.fragment_home
-
-    //recyclerview的底部加载view 因为在首页要动态改变他的颜色，所以加了他这个字段
-//    private lateinit var footView: DefineLoadMoreView
 
     override fun initView(savedInstanceState: Bundle?) {
         immersionBar {
@@ -62,41 +54,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
 
-        loadSir = loadServiceInit(mDataBinding.swipeRefresh) {
+        loadSir = loadServiceInit(mDataBinding.smartRefreshLayout) {
             loadSir.showLoading()
             mViewModel.getBannerData()
-
             mViewModel.getHomeData(true)
         }
-//        lifecycleScope.launch {
-//            mViewModel.getData().collectLatest {
-//                LogUtils.e("====")
-//                articleAdapter.submitData(it)
-//                //LogUtils.e(articleAdapter.getItemId(0))
-//            }
-//        }
 
-//        articleAdapter.addLoadStateListener {
-//            when(it.refresh){
-//                is LoadState.Loading ->{
-//                    LogUtils.e("Loading")
-//                }
-//                is LoadState.Error ->{
-//                    LogUtils.e("Error")
-//                }
-//                is LoadState.NotLoading ->{
-//                    LogUtils.e("NotLoading")
-//                }
-//            }
-//        }
-        mDataBinding.recyclerView.init(LinearLayoutManager(context), articleAdapter).let {
-            //因为首页要添加轮播图，所以我设置了firstNeedTop字段为false,即第一条数据不需要设置间距
-            it.addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
-//            footView = it.initFooter {
-//                mViewModel.getHomeData(false)
-//            }
-            //初始化FloatingActionButton
-            //it.initFloatBtn(floatBtn)
+        mDataBinding.smartRefreshLayout.setOnRefreshListener {
+            mViewModel.getHomeData(true)
+        }
+
+        mDataBinding.smartRefreshLayout.setOnLoadMoreListener {
+            mViewModel.getHomeData(false)
+        }
+
+        mDataBinding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = articleAdapter
+            addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
         }
 
         articleAdapter.run {
@@ -133,13 +108,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     articleAdapter,
                     loadSir,
                     mDataBinding.recyclerView,
-                    mDataBinding.swipeRefresh
+                    mDataBinding.smartRefreshLayout
                 )
             }
 
             bannerData.observe(viewLifecycleOwner) { resultState ->
                 parseState(resultState, { data ->
-                    if (mDataBinding.recyclerView.headerCount == 0) {
+                    if (articleAdapter.headerLayoutCount == 0) {
                         val headView =
                             LayoutInflater.from(context).inflate(R.layout.include_banner, null)
 
@@ -161,7 +136,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                             }
                         }).addBannerLifecycleObserver(this@HomeFragment).indicator =
                             CircleIndicator(mActivity)
-                        mDataBinding.recyclerView.addHeaderView(headView)
+                        articleAdapter.addHeaderView(headView)
                         mDataBinding.recyclerView.scrollToPosition(0)
                     }
                 })

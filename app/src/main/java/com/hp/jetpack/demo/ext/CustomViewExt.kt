@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ConvertUtils
@@ -29,9 +28,9 @@ import com.hp.jetpack.demo.weight.recyclerview.DefineLoadMoreView
 import com.hp.jetpack.demo.weight.viewpage.ScaleTransitionPagerTitleView
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yanzhenjie.recyclerview.SwipeRecyclerView
 import net.lucode.hackware.magicindicator.MagicIndicator
-import net.lucode.hackware.magicindicator.buildins.UIUtil
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
@@ -117,11 +116,14 @@ fun <T> loadListData(
     data: ListDataUiState<T>,
     baseQuickAdapter: BaseQuickAdapter<T, *>,
     loadService: LoadService<*>,
-    recyclerView: SwipeRecyclerView,
-    swipeRefreshLayout: SwipeRefreshLayout
+    recyclerView: RecyclerView,
+    smartRefreshLayout: SmartRefreshLayout
 ) {
-    swipeRefreshLayout.isRefreshing = false
-    recyclerView.loadMoreFinish(data.isEmpty, data.hasMore)
+    if (data.isRefresh) {
+        smartRefreshLayout.finishRefresh()
+    } else {
+        smartRefreshLayout.finishLoadMore()
+    }
     if (data.isSuccess) {
         //成功
         when {
@@ -145,8 +147,6 @@ fun <T> loadListData(
         if (data.isRefresh) {
             //如果是第一页，则显示错误界面，并提示错误信息
             loadService.showError(data.errMessage)
-        } else {
-            recyclerView.loadMoreError(0, data.errMessage)
         }
     }
 }
@@ -218,13 +218,15 @@ fun hideSoftKeyboard(activity: Activity?) {
 fun MagicIndicator.bindViewPager2(
     viewPager: ViewPager2,
     mStringList: MutableList<String> = arrayListOf(),
-    action: (index: Int) -> Unit = {}) {
+    action: (index: Int) -> Unit = {}
+) {
     val commonNavigator = CommonNavigator(appContext)
     commonNavigator.adapter = object : CommonNavigatorAdapter() {
 
         override fun getCount(): Int {
-            return  mStringList.size
+            return mStringList.size
         }
+
         override fun getTitleView(context: Context, index: Int): IPagerTitleView {
             return ScaleTransitionPagerTitleView(appContext).apply {
                 //设置文本
@@ -242,6 +244,7 @@ fun MagicIndicator.bindViewPager2(
                 }
             }
         }
+
         override fun getIndicator(context: Context): IPagerIndicator {
             return LinePagerIndicator(context).apply {
                 mode = LinePagerIndicator.MODE_EXACTLY

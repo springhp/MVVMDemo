@@ -6,8 +6,9 @@ import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.databinding.FragmentRegisterBinding
 import com.hp.jetpack.demo.ext.nav
+import com.hp.jetpack.demo.model.LoginViewModel
 
-class RegisterFragment : BaseFragment<BaseViewModel, FragmentRegisterBinding>() {
+class RegisterFragment : BaseFragment<LoginViewModel, FragmentRegisterBinding>() {
     override fun layoutId(): Int = R.layout.fragment_register
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -20,4 +21,12 @@ class RegisterFragment : BaseFragment<BaseViewModel, FragmentRegisterBinding>() 
         }
     }
 
+    inner class ProxyClick {
+        fun register() {
+            mViewModel.register()
+        }
+
+        fun login() {
+        }
+    }
 }

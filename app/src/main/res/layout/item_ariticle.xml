@@ -28,7 +28,6 @@
                 android:id="@+id/item_home_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_imgselector"
                 android:textColor="@color/colorBlack666"
                 android:textSize="13dp"
                 tools:text="有何高见" />
