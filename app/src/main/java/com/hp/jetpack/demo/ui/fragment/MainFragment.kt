@@ -30,7 +30,7 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                             DataFragment()
                         }
                         3 -> {
-                            VisitorFragment()
+                            WxArticleFragment()
                         }
                         else -> {
                             SettingFragment()

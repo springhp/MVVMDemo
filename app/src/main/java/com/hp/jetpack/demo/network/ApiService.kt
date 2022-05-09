@@ -1,9 +1,6 @@
 package com.hp.jetpack.demo.network
 
-import com.hp.jetpack.demo.data.bean.ApiPagerResponse
-import com.hp.jetpack.demo.data.bean.AriticleResponse
-import com.hp.jetpack.demo.data.bean.BannerResponse
-import com.hp.jetpack.demo.data.bean.UserInfo
+import com.hp.jetpack.demo.data.bean.*
 import com.hp.jetpack.demo.data.bean.result.AddDeviceWhiteResult
 import com.hp.jetpack.demo.data.bean.result.BaseResult
 import com.hp.jetpack.demo.data.bean.result.DistributeDataResult
@@ -91,6 +88,26 @@ interface ApiService {
      */
     @GET("article/list/{page}/json")
     suspend fun getAritrilList(@Path("page") pageNo: Int): ApiResponse<ApiPagerResponse<ArrayList<AriticleResponse>>>
+
+    /**
+     * 项目分类
+     */
+    @GET("project/tree/json")
+    suspend fun getProjectTree(): ApiResponse<ArrayList<ProjectTree>>
+
+
+    /**
+     * 项目列表数据
+     */
+    @GET("project/list/{page}/json")
+    suspend fun getProjectList(
+        @Path("page") pageNo: Int,
+        @Query("cid") cid: Int
+    ): ApiResponse<ApiPagerResponse<ArrayList<ProjectResponse>>>
+
+    @GET("wxarticle/chapters/json ")
+    suspend fun getWxArticleTree(): ApiResponse<ArrayList<WxArticleTree>>
+
 //
 //    /**
 //     * 项目分类标题

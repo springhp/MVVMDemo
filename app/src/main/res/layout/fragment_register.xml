@@ -51,7 +51,7 @@
             android:hint="密码"
             android:inputType="textPassword"
             android:paddingLeft="16dp"
-            android:text="@{model.passwordField}"
+            android:text="@={model.passwordField}"
             app:layout_constraintTop_toBottomOf="@id/et_name" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -63,7 +63,7 @@
             android:layout_marginRight="24dp"
             android:background="@color/colorPrimary"
             android:onClick="@{()->click.register()}"
-            android:text="注册"
+            android:text="注册2"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btn_ok" />
 

@@ -1,17 +1,17 @@
 package com.hp.jetpack.demo.model
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
-import com.hp.jetpack.demo.ext.request
+import com.hp.jetpack.demo.data.bean.UserInfo
+import com.hp.jetpack.demo.data.state.ResultState2
+import com.hp.jetpack.demo.ext.request3
 import com.hp.jetpack.demo.model.databind.StringObservableField
 import com.hp.jetpack.demo.network.apiService
-import kotlinx.coroutines.launch
+import com.kunminx.architecture.ui.callback.UnPeekLiveData
 
 class LoginViewModel() : BaseViewModel() {
-    val nameField = StringObservableField("hp")
+    val nameField = StringObservableField("hp8952")
     val passwordField = StringObservableField("123456")
-    val loginState = MutableLiveData<Boolean>()
+    val loginState = UnPeekLiveData<ResultState2<UserInfo>>()
 
     fun onNameChanged(name: CharSequence) {
         nameField.set(name.toString())
@@ -21,21 +21,14 @@ class LoginViewModel() : BaseViewModel() {
         passwordField.set(password.toString())
     }
 
-    fun login(name: String, password: String) {
-//        request({apiService.login(name,password)},)
+    fun login() {
+        request3({ apiService.login(nameField.get(), passwordField.get()) }, loginState)
     }
 
     fun register() {
-        viewModelScope.launch {
-            runCatching {
-                apiService.register(nameField.get(), passwordField.get(), passwordField.get())
-            }.onSuccess {
-                loginState.postValue(it.isSuccess())
-            }.onFailure {
-
-            }
-
-        }
-
+        request3(
+            { apiService.register(nameField.get(), passwordField.get(), passwordField.get()) },
+            loginState
+        )
     }
 }

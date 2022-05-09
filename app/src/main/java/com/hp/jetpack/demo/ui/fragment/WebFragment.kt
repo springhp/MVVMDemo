@@ -12,10 +12,7 @@ import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.VibrateUtils
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
-import com.hp.jetpack.demo.data.bean.AriticleResponse
-import com.hp.jetpack.demo.data.bean.BannerResponse
-import com.hp.jetpack.demo.data.bean.CollectResponse
-import com.hp.jetpack.demo.data.bean.CollectUrlResponse
+import com.hp.jetpack.demo.data.bean.*
 import com.hp.jetpack.demo.data.enums.CollectType
 import com.hp.jetpack.demo.databinding.FragmentWebBinding
 import com.hp.jetpack.demo.ext.hideSoftKeyboard
@@ -72,6 +69,14 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
                 mViewModel.showTitle = it.name
                 //从收藏列表过来的，肯定 是 true 了
                 mViewModel.collect = true
+                mViewModel.url = it.link
+                mViewModel.collectType = CollectType.Url.type
+            }
+
+            getParcelable<ProjectResponse>("project")?.let {
+                mViewModel.ariticleId = it.id
+                mViewModel.showTitle = it.title
+                mViewModel.collect = it.collect
                 mViewModel.url = it.link
                 mViewModel.collectType = CollectType.Url.type
             }

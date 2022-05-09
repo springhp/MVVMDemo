@@ -62,7 +62,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
             android:background="@color/colorPrimary"
-            android:onClick="@{()->click.register()}"
+            android:onClick="@{()->click.login()}"
             android:text="登陆"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/et_password" />

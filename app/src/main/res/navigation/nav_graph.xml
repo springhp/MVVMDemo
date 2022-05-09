@@ -31,7 +31,8 @@
     <fragment
         android:id="@+id/register_fragment"
         android:name="com.hp.jetpack.demo.ui.fragment.RegisterFragment"
-        android:label="Login" />
+        android:label="register"
+        tools:layout="@layout/fragment_register"/>
 
     <action
         android:id="@+id/action_to_webFragment"

@@ -20,6 +20,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.app.appContext
+import com.hp.jetpack.demo.data.bean.ProjectTree
+import com.hp.jetpack.demo.data.bean.WxArticleTree
 import com.hp.jetpack.demo.network.state.ListDataUiState
 import com.hp.jetpack.demo.weight.loadCallBack.EmptyCallback
 import com.hp.jetpack.demo.weight.loadCallBack.ErrorCallback
@@ -36,6 +38,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView
 
 fun loadServiceInit(view: View, callback: () -> Unit): LoadService<Any> {
     val loadSir = LoadSir.getDefault().register(view) {
@@ -217,7 +220,7 @@ fun hideSoftKeyboard(activity: Activity?) {
 
 fun MagicIndicator.bindViewPager2(
     viewPager: ViewPager2,
-    mStringList: MutableList<String> = arrayListOf(),
+    mStringList: MutableList<ProjectTree> = arrayListOf(),
     action: (index: Int) -> Unit = {}
 ) {
     val commonNavigator = CommonNavigator(appContext)
@@ -228,33 +231,39 @@ fun MagicIndicator.bindViewPager2(
         }
 
         override fun getTitleView(context: Context, index: Int): IPagerTitleView {
-            return ScaleTransitionPagerTitleView(appContext).apply {
-                //设置文本
-                text = mStringList[index].toHtml()
-                //字体大小
-                textSize = 22F
-                //未选中颜色
-                normalColor = Color.WHITE
-                //选中颜色
-                selectedColor = Color.WHITE
-                //点击事件
-                setOnClickListener {
-                    viewPager.currentItem = index
-                    action.invoke(index)
-                }
+            return ClipPagerTitleView(context).apply {
+                text = mStringList[index].name
+                textColor = Color.WHITE
+                clipColor = Color.WHITE
+
             }
+//            return ScaleTransitionPagerTitleView(appContext).apply {
+//                //设置文本
+//                text = mStringList[index].name.toHtml()
+//                //字体大小
+//                textSize = 18F
+//                //未选中颜色
+//                normalColor = Color.WHITE
+//                //选中颜色
+//                selectedColor = Color.WHITE
+//                //点击事件
+//                setOnClickListener {
+//                    viewPager.currentItem = index
+//                    action.invoke(index)
+//                }
+//            }
         }
 
         override fun getIndicator(context: Context): IPagerIndicator {
             return LinePagerIndicator(context).apply {
-                mode = LinePagerIndicator.MODE_EXACTLY
+                mode = LinePagerIndicator.MODE_WRAP_CONTENT
                 //线条的宽高度
-                lineHeight = ConvertUtils.dp2px(3F).toFloat()
-                lineWidth = ConvertUtils.dp2px(30F).toFloat()
-                //线条的圆角
-                roundRadius = ConvertUtils.dp2px(6F).toFloat()
-                startInterpolator = AccelerateInterpolator()
-                endInterpolator = DecelerateInterpolator(2.0f)
+//                lineHeight = ConvertUtils.dp2px(3F).toFloat()
+//                lineWidth = ConvertUtils.dp2px(30F).toFloat()
+//                //线条的圆角
+//                roundRadius = ConvertUtils.dp2px(6F).toFloat()
+//                startInterpolator = AccelerateInterpolator()
+//                endInterpolator = DecelerateInterpolator(2.0f)
                 //线条的颜色
                 setColors(Color.WHITE)
             }
@@ -300,4 +309,79 @@ fun ViewPager2.init(
     return this
 }
 
+fun MagicIndicator.bindViewPager3(
+    viewPager: ViewPager2,
+    mStringList: MutableList<WxArticleTree> = arrayListOf(),
+    action: (index: Int) -> Unit = {}
+) {
+    val commonNavigator = CommonNavigator(appContext)
+    commonNavigator.adapter = object : CommonNavigatorAdapter() {
+
+        override fun getCount(): Int {
+            return mStringList.size
+        }
+
+        override fun getTitleView(context: Context, index: Int): IPagerTitleView {
+            return ClipPagerTitleView(context).apply {
+                text = mStringList[index].name
+                textColor = Color.WHITE
+                clipColor = Color.WHITE
+
+            }
+//            return ScaleTransitionPagerTitleView(appContext).apply {
+//                //设置文本
+//                text = mStringList[index].name.toHtml()
+//                //字体大小
+//                textSize = 18F
+//                //未选中颜色
+//                normalColor = Color.WHITE
+//                //选中颜色
+//                selectedColor = Color.WHITE
+//                //点击事件
+//                setOnClickListener {
+//                    viewPager.currentItem = index
+//                    action.invoke(index)
+//                }
+//            }
+        }
+
+        override fun getIndicator(context: Context): IPagerIndicator {
+            return LinePagerIndicator(context).apply {
+                mode = LinePagerIndicator.MODE_WRAP_CONTENT
+                //线条的宽高度
+//                lineHeight = ConvertUtils.dp2px(3F).toFloat()
+//                lineWidth = ConvertUtils.dp2px(30F).toFloat()
+//                //线条的圆角
+//                roundRadius = ConvertUtils.dp2px(6F).toFloat()
+//                startInterpolator = AccelerateInterpolator()
+//                endInterpolator = DecelerateInterpolator(2.0f)
+                //线条的颜色
+                setColors(Color.WHITE)
+            }
+        }
+    }
+    this.navigator = commonNavigator
+
+    viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            this@bindViewPager3.onPageSelected(position)
+            action.invoke(position)
+        }
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            this@bindViewPager3.onPageScrolled(position, positionOffset, positionOffsetPixels)
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {
+            super.onPageScrollStateChanged(state)
+            this@bindViewPager3.onPageScrollStateChanged(state)
+        }
+    })
+}
 
