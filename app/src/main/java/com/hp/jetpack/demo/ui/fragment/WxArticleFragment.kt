@@ -35,7 +35,7 @@ class WxArticleFragment : BaseFragment<WxArticleViewModel,FragmentWxAriticleBind
                     mDataList.addAll(list)
                     LogUtils.e(mDataList.size)
                     mDataList.forEachIndexed { index, _ ->
-                        fragments.add(ProjectChildFragment.newInstance(mDataList[index].id))
+                        fragments.add(WxArticleChildFragment.newInstance(mDataList[index].id))
                     }
 
                     mDataBinding.viewpage.adapter?.notifyDataSetChanged()

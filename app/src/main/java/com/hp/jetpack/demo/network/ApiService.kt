@@ -108,6 +108,15 @@ interface ApiService {
     @GET("wxarticle/chapters/json ")
     suspend fun getWxArticleTree(): ApiResponse<ArrayList<WxArticleTree>>
 
+    /**
+     * 项目列表数据
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    suspend fun getWxArticleList(
+        @Path("page") pageNo: Int,
+        @Path("id") id: Int
+    ): ApiResponse<ApiPagerResponse<ArrayList<AriticleResponse>>>
+
 //
 //    /**
 //     * 项目分类标题
