@@ -2,9 +2,13 @@ package com.hp.jetpack.demo.ext
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.base.fragment.BaseVmFragment
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
-import com.hp.jetpack.demo.data.bean.UserInfo
+import com.hp.jetpack.demo.data.bean.ApiPagerResponse
 import com.hp.jetpack.demo.data.state.ResultState2
 import com.hp.jetpack.demo.network.BaseResponse
 import com.hp.jetpack.demo.network.exception.AppException
@@ -13,6 +17,7 @@ import com.hp.jetpack.demo.network.state.ResultState
 import com.hp.jetpack.demo.network.state.paresException
 import com.hp.jetpack.demo.network.state.paresResult
 import com.kunminx.architecture.ui.callback.UnPeekLiveData
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.*
 import java.lang.reflect.ParameterizedType
 
@@ -285,5 +290,30 @@ fun <T> BaseViewModel.request3(
             success.postValue(ResultState2(exception.errCode, exception.errorMsg))
         }
     }
+}
+
+fun <T> BaseFragment<*, *>.convertPageData(
+    smartRefreshLayout: SmartRefreshLayout,
+    adapter: BaseQuickAdapter<T, BaseViewHolder>,
+    state: ResultState2<ApiPagerResponse<ArrayList<T>>>,
+    isRefresh: Boolean
+) {
+    smartRefreshLayout.finishRefresh()
+    smartRefreshLayout.finishLoadMore()
+    if (state.isSuccess()) {
+        state.data?.let {
+            if (it.datas.size < 40) {
+                smartRefreshLayout.setEnableLoadMore(false)
+            }
+            if (isRefresh) {
+                adapter.data.clear()
+            }
+            adapter.data.addAll(it.datas)
+            adapter.notifyDataSetChanged()
+        }
+    } else {
+        ToastUtils.showShort(state.message)
+    }
+
 }
 

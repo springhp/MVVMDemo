@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import com.gyf.immersionbar.ktx.immersionBar
+import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.viewmodel.BaseViewModel
 import com.hp.jetpack.demo.ext.getVmClazz
 
@@ -48,6 +50,10 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
     }
 
     override fun onResume() {
+        immersionBar {
+            statusBarColor(R.color.colorPrimary)
+            navigationBarColor(R.color.white)
+        }
         super.onResume()
         onVisible()
     }

@@ -1,9 +1,13 @@
 package com.hp.jetpack.demo.ui.fragment
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import com.gyf.immersionbar.ktx.immersionBar
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.databinding.FragmentMeBinding
+import com.hp.jetpack.demo.ext.jumpByLogin
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.ext.navigateAction
 import com.hp.jetpack.demo.model.MeViewModel
@@ -21,17 +25,14 @@ class MeFragment : BaseFragment<MeViewModel, FragmentMeBinding>() {
 
         /** 登录 */
         fun login() {
-            if (!CacheUtil.isLogin()) {
-                nav().navigateAction(R.id.action_to_loginFragment)
-            }
-//            nav().jumpByLogin {}
+            nav().jumpByLogin {}
         }
 
         /** 收藏 */
         fun collect() {
-//            nav().jumpByLogin {
-//                it.navigateAction(R.id.action_mainfragment_to_collectFragment)
-//            }
+            nav().jumpByLogin {
+                it.navigateAction(R.id.smart_refresh_layout_fragment)
+            }
         }
 
         /** 积分 */
@@ -78,7 +79,7 @@ class MeFragment : BaseFragment<MeViewModel, FragmentMeBinding>() {
 
         /** 设置*/
         fun setting() {
-//            nav().navigateAction(R.id.action_mainfragment_to_settingFragment)
+            nav().navigateAction(R.id.setting_Fragment)
         }
 
         /**demo*/

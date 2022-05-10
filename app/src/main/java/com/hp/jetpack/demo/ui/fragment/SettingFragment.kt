@@ -30,6 +30,7 @@ import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.data.bean.result.EnterpriseBean
 import com.hp.jetpack.demo.databinding.FragmentSettingBinding
+import com.hp.jetpack.demo.ext.initClose
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.model.SettingViewModel
 import com.hp.jetpack.demo.ui.activity.RoomActivity
@@ -44,6 +45,9 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>()
     lateinit var soundPool: SoundPool
     var soundID = 0
     override fun initView(savedInstanceState: Bundle?) {
+        mDataBinding.toolbar.initClose{
+            nav().navigateUp()
+        }
         soundPool = SoundPool.Builder().apply {
             setMaxStreams(2) // //传入最多播放音频数量
             val attrBuilder: AudioAttributes.Builder = AudioAttributes.Builder()

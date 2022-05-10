@@ -1,6 +1,7 @@
 package com.hp.jetpack.demo.util
 
 import android.text.TextUtils
+import com.blankj.utilcode.util.GsonUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hp.jetpack.demo.data.bean.UserInfo
@@ -14,7 +15,7 @@ object CacheUtil {
         val kv = MMKV.mmkvWithID("app")
         val userStr = kv.decodeString("user")
         return if (TextUtils.isEmpty(userStr)) {
-           null
+            null
         } else {
             Gson().fromJson(userStr, UserInfo::class.java)
         }
@@ -58,10 +59,11 @@ object CacheUtil {
         val kv = MMKV.mmkvWithID("app")
         return kv.decodeBool("first", true)
     }
+
     /**
      * 是否是第一次登陆
      */
-    fun setFirst(first:Boolean): Boolean {
+    fun setFirst(first: Boolean): Boolean {
         val kv = MMKV.mmkvWithID("app")
         return kv.encode("first", first)
     }
@@ -73,28 +75,63 @@ object CacheUtil {
         val kv = MMKV.mmkvWithID("app")
         return kv.decodeBool("top", true)
     }
+
     /**
      * 设置首页是否开启获取指定文章
      */
-    fun setIsNeedTop(isNeedTop:Boolean): Boolean {
+    fun setIsNeedTop(isNeedTop: Boolean): Boolean {
         val kv = MMKV.mmkvWithID("app")
         return kv.encode("top", isNeedTop)
     }
+
     /**
      * 获取搜索历史缓存数据
      */
     fun getSearchHistoryData(): ArrayList<String> {
         val kv = MMKV.mmkvWithID("cache")
-        val searchCacheStr =  kv.decodeString("history")
+        val searchCacheStr = kv.decodeString("history")
         if (!TextUtils.isEmpty(searchCacheStr)) {
-            return Gson().fromJson(searchCacheStr
-                , object : TypeToken<ArrayList<String>>() {}.type)
+            return Gson().fromJson(searchCacheStr, object : TypeToken<ArrayList<String>>() {}.type)
         }
         return arrayListOf()
     }
 
     fun setSearchHistoryData(searchResponseStr: String) {
         val kv = MMKV.mmkvWithID("cache")
-        kv.encode("history",searchResponseStr)
+        var historyData = getSearchHistoryData()
+        var setHistoryData = historyData.toMutableSet()
+        setHistoryData.add(searchResponseStr)
+        if (setHistoryData.size > historyData.size) {
+            historyData.add(searchResponseStr)
+        }
+        if (historyData.size > 10) {
+            historyData.removeFirst()
+        }
+        kv.encode("history", GsonUtils.toJson(historyData))
+    }
+
+    fun setSearchHistoryDataAll(historyList: String) {
+        val kv = MMKV.mmkvWithID("cache")
+        kv.encode("history", historyList)
+    }
+
+    fun removeSearchHistoryData(searchResponseStr: String) {
+        val kv = MMKV.mmkvWithID("cache")
+        var historyData = getSearchHistoryData()
+        var flag = false
+        historyData.forEach {
+            if (it == searchResponseStr) {
+                flag = true
+            }
+        }
+        if (flag) {
+            historyData.remove(searchResponseStr)
+        }
+        kv.encode("history", GsonUtils.toJson(historyData))
+    }
+
+    fun clearSearchHistoryData() {
+        val kv = MMKV.mmkvWithID("cache")
+        kv.removeValueForKey("history")
     }
 }

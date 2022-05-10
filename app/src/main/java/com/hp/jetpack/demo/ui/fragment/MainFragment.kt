@@ -16,7 +16,7 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
 
         mDataBinding.mainViewpager.apply {
             isUserInputEnabled = false
-            offscreenPageLimit = 5
+            offscreenPageLimit = 4
             adapter = object : FragmentStateAdapter(this@MainFragment) {
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
@@ -27,13 +27,10 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                             ProjectFragment()
                         }
                         2 -> {
-                            DataFragment()
-                        }
-                        3 -> {
                             WxArticleFragment()
                         }
                         else -> {
-                            SettingFragment()
+                            MeFragment()
                         }
                     }
                 }
@@ -50,20 +47,17 @@ class MainFragment : BaseFragment<BaseViewModel, FragmentMainBinding>() {
                 R.id.menu_project -> {
                     mDataBinding.mainViewpager.setCurrentItem(1, false)
                 }
-                R.id.menu_system -> {
+                R.id.menu_public -> {
                     mDataBinding.mainViewpager.setCurrentItem(2, false)
                 }
-                R.id.menu_public -> {
-                    mDataBinding.mainViewpager.setCurrentItem(3, false)
-                }
                 else -> {
-                    mDataBinding.mainViewpager.setCurrentItem(4, false)
+                    mDataBinding.mainViewpager.setCurrentItem(3, false)
                 }
             }
             return@setOnItemSelectedListener true
         }
 
-        mDataBinding.mainBottom.selectedItemId = R.id.menu_project
+        mDataBinding.mainBottom.selectedItemId = R.id.menu_main
 
     }
 }

@@ -34,10 +34,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun layoutId() = R.layout.fragment_home
 
     override fun initView(savedInstanceState: Bundle?) {
-        immersionBar {
-            statusBarColor(R.color.colorPrimary)
-            navigationBarColor(R.color.colorPrimary)
-        }
         mDataBinding.toolbar.run {
             title = "首页"
             inflateMenu(R.menu.home_menu)
@@ -45,9 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.home_search -> {
-                        nav().navigate(R.id.city_picker_fragment, Bundle().apply {
-                            putString("test", "test2")
-                        })
+                        nav().navigateAction(R.id.search_fragment)
                     }
                 }
                 true
@@ -80,7 +74,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 nav().navigateAction(R.id.action_to_webFragment, Bundle().apply {
                     putParcelable(
                         "ariticleData",
-                        articleAdapter.data[position - 1]
+                        articleAdapter.data[position]
                         //1为head
                     )
                 })

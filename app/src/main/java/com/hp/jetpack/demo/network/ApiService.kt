@@ -117,6 +117,20 @@ interface ApiService {
         @Path("id") id: Int
     ): ApiResponse<ApiPagerResponse<ArrayList<AriticleResponse>>>
 
+    /**
+    //     * 获取热门搜索数据
+    //     */
+    @GET("hotkey/json")
+    suspend fun getSearchData(): ApiResponse<ArrayList<SearchResponse>>
+
+    /**
+    //     * 根据关键词搜索数据
+    //     */
+    @POST("article/query/{page}/json")
+    suspend fun getSearchDataByKey(
+        @Path("page") pageNo: Int,
+        @Query("k") searchKey: String
+    ): ApiResponse<ApiPagerResponse<ArrayList<AriticleResponse>>>
 //
 //    /**
 //     * 项目分类标题

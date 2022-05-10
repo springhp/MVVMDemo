@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import com.hp.jetpack.demo.R
+import com.hp.jetpack.demo.util.CacheUtil
 
 /**
  * 作者　: hegaojian
@@ -18,6 +20,14 @@ fun Fragment.nav(): NavController {
 
 fun nav(view: View): NavController {
     return Navigation.findNavController(view)
+}
+
+fun NavController.jumpByLogin(action: (NavController) -> Unit) {
+    if (CacheUtil.isLogin()) {
+        action(this)
+    } else {
+        this.navigateAction(R.id.action_to_loginFragment)
+    }
 }
 
 var lastNavTime = 0L

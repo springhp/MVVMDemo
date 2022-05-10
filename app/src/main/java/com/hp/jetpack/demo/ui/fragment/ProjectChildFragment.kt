@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hp.jetpack.demo.R
 import com.hp.jetpack.demo.base.activity.BaseFragment
 import com.hp.jetpack.demo.databinding.FragmentProjectChlidBinding
+import com.hp.jetpack.demo.ext.convertPageData
 import com.hp.jetpack.demo.ext.nav
 import com.hp.jetpack.demo.ext.navigateAction
 import com.hp.jetpack.demo.model.ProjectViewModel
@@ -12,6 +13,7 @@ import com.hp.jetpack.demo.ui.adapter.ProjectChildAdapter
 
 
 class ProjectChildFragment : BaseFragment<ProjectViewModel, FragmentProjectChlidBinding>() {
+    var isRefresh = true
     var cid: Int = 0
     lateinit var mAdapter: ProjectChildAdapter
     override fun layoutId() = R.layout.fragment_project_chlid
@@ -52,11 +54,7 @@ class ProjectChildFragment : BaseFragment<ProjectViewModel, FragmentProjectChlid
     override fun createObserver() {
         super.createObserver()
         mViewModel.projectListState.observe(viewLifecycleOwner) {
-            mDataBinding.smartRefreshLayout.finishRefresh()
-            mDataBinding.smartRefreshLayout.finishLoadMore()
-            if (it.isSuccess()) {
-                it.data?.let { data -> mAdapter.addData(data.datas) }
-            }
+            convertPageData(mDataBinding.smartRefreshLayout,mAdapter,it,isRefresh)
         }
     }
 

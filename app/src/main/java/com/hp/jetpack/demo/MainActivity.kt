@@ -1,7 +1,9 @@
 package com.hp.jetpack.demo
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
 import com.blankj.utilcode.util.LogUtils
@@ -25,6 +27,7 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
 
     var exitTime = 0L
     override fun initView(savedInstanceState: Bundle?) {
+        LogUtils.e("initView")
         immersionBar {
             statusBarColor(R.color.colorPrimary)
         }
@@ -75,9 +78,15 @@ class MainActivity : BaseVmActivity<BaseViewModel>() {
             }
 
             override fun onConnected(networkType: NetworkUtils.NetworkType?) {
+                LogUtils.e("网络连接")
                 ToastUtils.showShort("网络连接")
             }
         })
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        LogUtils.e("onUserLeaveHint")
     }
 
     override fun showLoading(message: String) {
